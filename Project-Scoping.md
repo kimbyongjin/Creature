@@ -23,7 +23,7 @@
     > loading screen
     > currency to spend on food / toys
 
-### Fetures
+## Fetures
   - Local storage web-animal
     > Persistent creature attributes
       - hunger
@@ -49,7 +49,7 @@
       - relative creature age
       - creature evolution
 
-#### Resources:
+## Resources:
   - JS
     > MDN
     > C3 documentation
@@ -60,7 +60,7 @@
     >
 
 
-##### Code I will need:
+## Code I will need:
 
   - JS:
     > jQuery
