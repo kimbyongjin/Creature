@@ -15,13 +15,13 @@
 
 ## Designs
   - tomagachi-like app with screen images and sprites.
-    > Will need to implement animation
-    > sounds?
-    > animate images vs color boxes
-    > embedded music?
-    > sound fx?
-    > loading screen
-    > currency to spend on food / toys
+    - Will need to implement animation
+    - sounds?
+    - animate images vs color boxes
+    - embedded music?
+    - sound fx?
+    - loading screen
+    - currency to spend on food / toys
 
 ## Fetures
   - Local storage web-animal
@@ -51,8 +51,8 @@
 
 ## Resources:
   - JS
-    > MDN
-    > C3 documentation
+    - MDN
+    - C3 documentation
     >
 
   - CSS
@@ -63,22 +63,22 @@
 ## Code I will need:
 
   - JS:
-    > jQuery
-    > underscore
-    > C3?
-    > on-click triggers
-      - sounds
-      - purchases
-      - evolution
-    > heavy use of setTimeout() functionality
+    - jQuery
+    - underscore
+    - C3?
+      > on-click triggers
+        - sounds
+        - purchases
+        - evolution
+    - heavy use of setTimeout() functionality
     > 
 
   - CSS:
-    > jQuery
-    > flexbox
+    - jQuery
+    - flexbox
     > 
 
   - HTML:
-    > jQuery
-    > animation tehniques
-    > embeedded sounds
+    - jQuery
+    - animation tehniques
+    - embeedded sounds
