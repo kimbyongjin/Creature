@@ -69,7 +69,16 @@ $(document).ready(function () {
 		}
 
 		loadLocalStorage();
-	});	
+  });
+  
+  // establishes session time and game tick interval
+  var sessionTime = 0
+  var gameTick = function() {
+    console.log('session time: ' + sessionTime)
+    sessionTime++
+    setTimeout(gameTick, 1000);
+  }
+  gameTick();
 
 });
 /*
@@ -120,3 +129,4 @@ var randomColor = function() { // generates random hex color value including #
   var hexNum = Math.floor(Math.random() * 16777215).toString(16);
   return '#' + hexNum;
 }
+
