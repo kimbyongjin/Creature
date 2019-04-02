@@ -33,11 +33,12 @@ body {
 	display: flex;
 	border: 2px solid;
 	border-radius: 10px;
-	height: 550px;
-	width: 550px;
+	height: 500px;
+	width: 662px;
 	padding: 20px;
 	justify-content: center;
 	align-items: flex-end;
+	background-image: url('file:///Users/octopus/hackReactor/HREXT%2008/hrext08-my-cruddy-app/images/Wheat_Fields_at_Auvers_Under_Clouded_Sky_1890_Vincent_van_Gogh.jpg');
 }
 
 /*
@@ -90,7 +91,38 @@ button.button {
 */
 
 #creature {
+	display: flex;
 	background-color: rgb(33, 89, 116);
 	height: 150px;
 	width: 150px;
+	justify-content: space-around;
+	padding: 20px;
+	border-radius: 34% 66% 47% 53% / 22% 28% 72% 78%;
+}
+
+.eye {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#left-eye {
+	background-color: rgb(150, 3, 40);
+	height: 80px;
+	width: 45px;
+	border-radius: 64% 36% 27% 73% / 22% 28% 72% 78%;
+}
+
+#right-eye {
+	background-color: brown;
+	height: 50px;
+	width: 50px;
+	border-radius: 17% 83% 13% 87% / 51% 70% 30% 49% ;
+}
+
+.pupil {
+	background-color: rgb(71, 45, 45);
+	height: 20px;
+	width: 14px;
+	border-radius: 48% 52% 47% 53% / 68% 69% 31% 32%;
 }

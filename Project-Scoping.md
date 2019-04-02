@@ -85,26 +85,26 @@
 
 # Action Plan:
   ### Basic Formatting
-    Create a simple player box with colored square 'creature' in the center, at the bottom of the screen, padding to keep it off the border.
-    Add page background color.
-    Create basic flexbox environment for body and player box.
-    Create creature div
-    Nested flexbox inside creature div for facial features
-    Simple eye vs more facial fetures?
-    Player box background color, border, shape, size, picture vs color?
+    [x] Create a simple player box with colored square 'creature' in the center, at the bottom of the screen, padding to keep it off the border.
+    [x] Add page background color.
+    [x] Create basic flexbox environment for body and player box.
+    [x] Create creature div
+    [x] Nested flexbox inside creature div for facial features
+    [x] Simple eye vs more facial fetures?
+    [] Player box background color, border, shape, size, picture vs color?
 
   ### Creture Fetures
     Attributes: 
-      Hunger -> grows with time & decreases with interaction 'feed'
-      Happiness -> degrades with time & increases with interaction 'play'
-      Septic -> grows with time & decreases with interaction 'bath'
-      halflife -> degrades with time & increases with interaction 'irradiate'
+      [] Hunger -> grows with time & decreases with interaction 'feed'
+      [] Happiness -> degrades with time & increases with interaction 'play'
+      [] Septic -> grows with time & decreases with interaction 'bath'
+      [] halflife -> degrades with time & increases with interaction 'irradiate'
 
     Interactions:
-      feed -> decreases hunger - increase septic
-      play -> increases happiness - increase septic
-      bath -> decreases septic - decrease halflife
-      irradiate -> increases haflife - cost money?
+      [] feed -> decreases hunger - increase septic
+      [] play -> increases happiness - increase septic
+      [] bath -> decreases septic - decrease halflife
+      [] irradiate -> increases haflife - cost money?
 
   ### Basic setTimeout functionality
     Set game tick value of 1 tick to equal 1000 ms standard
@@ -117,11 +117,11 @@
 
   ### Interaction Triggers
     Irradiate:
-      change creature and feature colors
+      [] change creature and feature colors
     Feed:
-      change position
+      [] change position
     Bath:
-      wash of blue across screen
+      [] wash of blue across screen
     Irradiate:
-      wash of orange/yellow across screen
+      [] wash of orange/yellow across screen
     
