@@ -39,6 +39,16 @@ body {
 	justify-content: center;
 	align-items: flex-end;
 	background-image: url('file:///Users/octopus/hackReactor/HREXT%2008/hrext08-my-cruddy-app/images/Wheat_Fields_at_Auvers_Under_Clouded_Sky_1890_Vincent_van_Gogh.jpg');
+	/* 
+	background image: File: Wheat Fields at Auvers Under Clouded Sky 1890 Vincent van Gogh.jpg 
+	This work is in the public domain in the United States because it was published (or registered with the U.S. Copyright Office) before January 1, 1924.
+	*/
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-around;
+	width: 615px;
 }
 
 /*
@@ -82,8 +92,15 @@ label {
 
 }
 
+
+
 button.button {
-	margin-right: 20px;
+	margin: 10px;
+	padding: 5px 10px 5px 10px;
+	background-color: darkslateblue;
+	color: goldenrod;
+	font-size: 30px;
+	cursor: pointer;
 }
 
 /* 

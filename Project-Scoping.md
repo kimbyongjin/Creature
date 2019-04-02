@@ -91,7 +91,7 @@
     [x] Create creature div
     [x] Nested flexbox inside creature div for facial features
     [x] Simple eye vs more facial fetures?
-    [] Player box background color, border, shape, size, picture vs color?
+    [x] Player box background color, border, shape, size, picture vs color?
 
   ### Creture Fetures
     Attributes: 
@@ -107,13 +107,14 @@
       [] irradiate -> increases haflife - cost money?
 
   ### Basic setTimeout functionality
-    Set game tick value of 1 tick to equal 1000 ms standard
-    Functions to move creature by manipulating CSS after a set timeout.
+    [] Set game tick value of 1 tick to equal 1000 ms standard
+    [] Functions to move creature by manipulating CSS after a set timeout.
       explore animation vs manipulate flexbox properties
-    Functions to degrade attributes with a set timeout
-    Function to generate random value
-    Change colors at random times, like eye color
-    Generate currency?
+    [] Functions to degrade attributes with a set timeout
+    [x] Function to generate random value
+    [x] Function to generate random hex color
+    [] Change colors at random times, like eye color
+    [] Generate currency?
 
   ### Interaction Triggers
     Irradiate:

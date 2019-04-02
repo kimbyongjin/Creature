@@ -109,3 +109,14 @@ var updateEntry = function(key, value) {
 var removeEntry = function(key) {
 	return localStorage.removeItem(key);
 }
+
+// Random val generation functions
+
+var generateRandom = function(max) { // return a random integer between 0 (inclusive) and max (exclusive)
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+var randomColor = function() { // generates random hex color value including #
+  var hexNum = Math.floor(Math.random() * 16777215).toString(16);
+  return '#' + hexNum;
+}
