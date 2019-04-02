@@ -13,8 +13,31 @@ state changing styling
 	FLEXBOX CONTAINER
 	guide: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 */
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgb(185, 156, 231);
+}
+
+/*
+	container styling
+*/
+
 .container {
 	display: flex;
+}
+
+.play-screen-container {
+	display: flex;
+	border: 2px solid;
+	border-radius: 10px;
+	height: 550px;
+	width: 550px;
+	padding: 20px;
+	justify-content: center;
+	align-items: flex-end;
 }
 
 /*
@@ -60,4 +83,14 @@ label {
 
 button.button {
 	margin-right: 20px;
+}
+
+/* 
+	creature styling
+*/
+
+#creature {
+	background-color: rgb(33, 89, 116);
+	height: 150px;
+	width: 150px;
 }
