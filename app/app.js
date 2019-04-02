@@ -89,7 +89,13 @@ $(document).ready(function () {
 var moveCreature = function() {
   $('.play-screen-container').css('justify-content', randomJustify);
   $('#chick').css('transform', randomMirror);
+  $('#creature').css('padding', randomPadding);
   setTimeout(moveCreature, 2000);
+}
+
+var randomPadding = function() {
+  var paddingCheck = generateRandom(250);
+  return paddingCheck + 'px';
 }
 
 var randomJustify = function() {
