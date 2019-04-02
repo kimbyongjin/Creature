@@ -71,34 +71,87 @@ $(document).ready(function () {
 		loadLocalStorage();
   });
   
-  // establishes session time and game tick interval on page load
+  // interaction buttons
+
+  $('#btn-feed').on('click', function(e) { // feeding decreases hunger 
+    var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
+    if (currentHunger >= 7) {
+      currentHunger -= 7;
+      // feed message / sprite
+      updateEntry('Hunger', JSON.stringify(currentHunger))
+    } else {
+      updateEntry('Hunger', '0');
+    }
+
+    loadLocalStorage()
+  });
+
+  $('#btn-play').on('click', function(e) {
+    var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
+    if (currentHappiness <= 94) {
+      currentHappiness += 6;
+      // play message / sprite
+      updateEntry('Happiness', JSON.stringify(currentHappiness));
+    } else {
+      updateEntry('Happiness', '100');
+    }
+
+    loadLocalStorage()
+  });
+
+  $('#btn-bath').on('click', function(e) {
+    var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
+    if (currentSeptic >= 11) {
+      currentSeptic -= 11;
+      // play message / sprite
+      updateEntry('Septic', JSON.stringify(currentSeptic));
+    } else {
+      updateEntry('Septic', '0');
+    }
+
+    loadLocalStorage();
+  });
+
+  $('#btn-irradiate').on('click', function(e) {
+    var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
+    if (currentHalfLife <= 82) {
+      currentHalfLife += 18;
+      updateEntry('Half-Life', JSON.stringify(currentHalfLife))
+    } else {
+      updateEntry('Half-Life', 100);
+    }
+
+    loadLocalStorage();
+  });
+  
   var sessionTime = 0
-  var gameTick = function() {
+  var gameTick = function() { // establishes session time and game tick interval on page load
     console.log('session time: ' + sessionTime)
     sessionTime++
     setTimeout(gameTick, 1000);
   }
-  gameTick();
+  
+  // gameTick(); // initiate game time
 
-  moveCreature();
+  moveCreature(); // initiate creature movement
 
 });
 
 // jQuery animation based on session time
 
-var moveCreature = function() {
+var moveCreature = function() { // random movement every 1.5 game ticks.
   $('.play-screen-container').css('justify-content', randomJustify);
   $('#chick').css('transform', randomMirror);
   $('#creature').css('padding', randomPadding);
-  setTimeout(moveCreature, 2000);
+  setTimeout(moveCreature, 1500);
 }
 
-var randomPadding = function() {
+var randomPadding = function() { // random padding
   var paddingCheck = generateRandom(250);
   return paddingCheck + 'px';
 }
 
-var randomJustify = function() {
+var randomJustify = function() { // random flex position
   var justifyCheck = generateRandom(3);
   if (justifyCheck === 0) {
     return 'center';

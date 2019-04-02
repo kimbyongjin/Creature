@@ -107,8 +107,8 @@
       [] irradiate -> increases haflife - cost money?
 
   ### Basic setTimeout functionality
-    [] Set game tick value of 1 tick to equal 1000 ms standard
-    [] Functions to move creature by manipulating CSS after a set timeout.
+    [x] Set game tick value of 1 tick to equal 1000 ms standard
+    [x] Functions to move creature by manipulating CSS after a set timeout.
       explore animation vs manipulate flexbox properties
     [] Functions to degrade attributes with a set timeout
     [x] Function to generate random value
