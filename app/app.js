@@ -71,7 +71,7 @@ $(document).ready(function () {
 		loadLocalStorage();
   });
   
-  // establishes session time and game tick interval
+  // establishes session time and game tick interval on page load
   var sessionTime = 0
   var gameTick = function() {
     console.log('session time: ' + sessionTime)
@@ -80,10 +80,39 @@ $(document).ready(function () {
   }
   gameTick();
 
+  moveCreature();
+
 });
+
+// jQuery animation based on session time
+
+var moveCreature = function() {
+  $('.play-screen-container').css('justify-content', randomJustify);
+  $('#chick').css('transform', randomMirror);
+  setTimeout(moveCreature, 2000);
+}
+
+var randomJustify = function() {
+  var justifyCheck = generateRandom(3);
+  if (justifyCheck === 0) {
+    return 'center';
+  }
+  if (justifyCheck === 1) {
+    return 'flex-end';
+  }
+  return 'flex-start';
+}
+
+var randomMirror = function() { // generate random creture direction
+  var mirrorCheck = generateRandom(2);
+  if (mirrorCheck === 0) {
+    return 'scaleX(-1)'
+  }
+  return 'scaleX(1)'
+}
+
+
 /*
-
-
 
 When an input element is given a name, that name becomes a property of the owning form element's HTMLFormElement.elements property. 
 That means if you have an input whose name is set to guest and another whose name is hat-size, the following code can be used:
