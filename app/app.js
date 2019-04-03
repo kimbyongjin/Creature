@@ -121,14 +121,14 @@ $(document).ready(function () {
     setTimeout(gameTick, 1000);
   }
   
-  // gameTick(); // initiate game time
+  gameTick(); // initiate game time
 
   // initiate all stat degredation / accumulation as well as movement
   moveCreature();
   degradeHalfLife();
-  degradeHappiness()
-  getHungry()
-  getSeptic()
+  degradeHappiness();
+  getHungry();
+  getSeptic();
 });
 // end Document.ready initialization
 
@@ -190,6 +190,7 @@ var degradeHalfLife = function() {
     updateEntry('Half-Life', JSON.stringify(currentHalfLife));
   }
 
+  console.log('degrade half-life')
   loadLocalStorage();
   setTimeout(degradeHalfLife, 45000);
 }
@@ -197,10 +198,11 @@ var degradeHalfLife = function() {
 var degradeHappiness = function() {
   var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
   if (currentHappiness > 0) {
-    currentHappiness -+ 1;
+    currentHappiness -= 1;
     updateEntry('Happiness', JSON.stringify(currentHappiness));
   }
 
+  console.log('degrade happy')
   loadLocalStorage()
   setTimeout(degradeHappiness, 30000);
 }
@@ -212,6 +214,7 @@ var getHungry = function() {
     updateEntry('Hunger', JSON.stringify(currentHunger));
   }
 
+  console.log('get hungry')
   loadLocalStorage()
   setTimeout(getHungry, 28000);
 }
@@ -223,6 +226,7 @@ var getSeptic = function() {
     updateEntry('Septic', JSON.stringify(currentSeptic));
   }
 
+  console.log('get septic')
   loadLocalStorage();
   setTimeout(getSeptic, 52000);
 }
