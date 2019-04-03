@@ -1,19 +1,7 @@
-var loadLocalStorage = function () {
-	var keys = Object.keys(localStorage)
-	var htmlString = '';
-	for (var i = 0; i < keys.length; i++) {
-		htmlString += `<tr><td>${keys[i]}</td><td>${localStorage[keys[i]]}</tr></tr>`;
-	}
-	$('tbody').html(htmlString)
-};
-
-var updateStatusLabel = function(message) {
-	$('#statusLabel').text('Status: ' + message);
-}
-
  //jQuery document ready initialization stuff
  ////button and form event handlers
  // logic for determining action probably needs to go in the event handler
+
 $(document).ready(function () {
 	loadLocalStorage();
 
@@ -68,49 +56,11 @@ $(document).ready(function () {
 			updateStatusLabel('key doesn\'t exist, nothing removed. :|');
 		}
 
-		loadLocalStorage();
-  });
-  
-  // interaction buttons
-
-  $('#btn-feed').on('click', function(e) { // feeding decreases hunger 
-    var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
-    if (currentHunger >= 7) {
-      currentHunger -= 7;
-      // feed message / sprite
-      updateEntry('Hunger', JSON.stringify(currentHunger))
-    } else {
-      updateEntry('Hunger', '0');
-    }
-
-    loadLocalStorage()
-  });
-
-  $('#btn-play').on('click', function(e) {
-    var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
-    if (currentHappiness <= 94) {
-      currentHappiness += 6;
-      // play message / sprite
-      updateEntry('Happiness', JSON.stringify(currentHappiness));
-    } else {
-      updateEntry('Happiness', '100');
-    }
-
-    loadLocalStorage()
-  });
-
-  $('#btn-bath').on('click', function(e) {
-    var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
-    if (currentSeptic >= 11) {
-      currentSeptic -= 11;
-      // play message / sprite
-      updateEntry('Septic', JSON.stringify(currentSeptic));
-    } else {
-      updateEntry('Septic', '0');
-    }
 
     loadLocalStorage();
   });
+  
+  // interaction buttons
 
   $('#btn-irradiate').on('click', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
@@ -124,6 +74,46 @@ $(document).ready(function () {
     loadLocalStorage();
   });
   
+  $('#btn-play').on('click', function(e) {
+    var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
+    if (currentHappiness <= 94) {
+      currentHappiness += 6;
+      // play message / sprite
+      updateEntry('Happiness', JSON.stringify(currentHappiness));
+    } else {
+      updateEntry('Happiness', '100');
+    }
+    
+    loadLocalStorage()
+  });
+  
+  $('#btn-feed').on('click', function(e) { // feeding decreases hunger 
+    var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
+    if (currentHunger >= 7) {
+      currentHunger -= 7;
+      // feed message / sprite
+      updateEntry('Hunger', JSON.stringify(currentHunger))
+    } else {
+      updateEntry('Hunger', '0');
+    }
+
+    loadLocalStorage()
+  });
+  
+  $('#btn-bath').on('click', function(e) {
+    var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
+    if (currentSeptic >= 11) {
+      currentSeptic -= 11;
+      // play message / sprite
+      updateEntry('Septic', JSON.stringify(currentSeptic));
+    } else {
+      updateEntry('Septic', '0');
+    }
+
+    loadLocalStorage();
+  });
+
+  
   var sessionTime = 0
   var gameTick = function() { // establishes session time and game tick interval on page load
     console.log('session time: ' + sessionTime)
@@ -133,9 +123,29 @@ $(document).ready(function () {
   
   // gameTick(); // initiate game time
 
-  moveCreature(); // initiate creature movement
-
+  // initiate all stat degredation / accumulation as well as movement
+  moveCreature();
+  degradeHalfLife();
+  degradeHappiness()
+  getHungry()
+  getSeptic()
 });
+// end Document.ready initialization
+
+// update storage 
+var loadLocalStorage = function () {
+	var keys = Object.keys(localStorage)
+	var htmlString = '';
+	for (var i = 0; i < keys.length; i++) {
+		htmlString += `<tr><td>${keys[i]}</td><td>${localStorage[keys[i]]}</tr></tr>`;
+	}
+	$('tbody').html(htmlString)
+};
+
+var updateStatusLabel = function(message) {
+	$('#statusLabel').text('Status: ' + message);
+}
+
 
 // jQuery animation based on session time
 
@@ -170,6 +180,52 @@ var randomMirror = function() { // generate random creture direction
   return 'scaleX(1)'
 }
 
+
+
+// attribute degredation and need incrementation
+var degradeHalfLife = function() {
+  var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
+  if (currentHalfLife > 0) {
+    currentHalfLife -= 1;
+    updateEntry('Half-Life', JSON.stringify(currentHalfLife));
+  }
+
+  loadLocalStorage();
+  setTimeout(degradeHalfLife, 45000);
+}
+
+var degradeHappiness = function() {
+  var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
+  if (currentHappiness > 0) {
+    currentHappiness -+ 1;
+    updateEntry('Happiness', JSON.stringify(currentHappiness));
+  }
+
+  loadLocalStorage()
+  setTimeout(degradeHappiness, 30000);
+}
+
+var getHungry = function() {
+  var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
+  if (currentHunger < 100) {
+    currentHunger += 1;
+    updateEntry('Hunger', JSON.stringify(currentHunger));
+  }
+
+  loadLocalStorage()
+  setTimeout(getHungry, 28000);
+}
+
+var getSeptic = function() {
+  var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
+  if (currentSeptic < 100) {
+    currentSeptic += 1;
+    updateEntry('Septic', JSON.stringify(currentSeptic));
+  }
+
+  loadLocalStorage();
+  setTimeout(getSeptic, 52000);
+}
 
 /*
 

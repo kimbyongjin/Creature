@@ -95,22 +95,22 @@
 
   ### Creture Fetures
     Attributes: 
-      [] Hunger -> grows with time & decreases with interaction 'feed'
-      [] Happiness -> degrades with time & increases with interaction 'play'
-      [] Septic -> grows with time & decreases with interaction 'bath'
-      [] halflife -> degrades with time & increases with interaction 'irradiate'
+      [x] Hunger -> grows with time & decreases with interaction 'feed'
+      [x] Happiness -> degrades with time & increases with interaction 'play'
+      [x] Septic -> grows with time & decreases with interaction 'bath'
+      [x] halflife -> degrades with time & increases with interaction 'irradiate'
 
     Interactions:
-      [] feed -> decreases hunger - increase septic
-      [] play -> increases happiness - increase septic
-      [] bath -> decreases septic - decrease halflife
-      [] irradiate -> increases haflife - cost money?
+      [x] feed -> decreases hunger - increase septic
+      [x] play -> increases happiness - increase septic
+      [x] bath -> decreases septic - decrease halflife
+      [x] irradiate -> increases haflife - cost money?
 
   ### Basic setTimeout functionality
     [x] Set game tick value of 1 tick to equal 1000 ms standard
     [x] Functions to move creature by manipulating CSS after a set timeout.
       explore animation vs manipulate flexbox properties
-    [] Functions to degrade attributes with a set timeout
+    [x] Functions to degrade attributes with a set timeout
     [x] Function to generate random value
     [x] Function to generate random hex color
     [] Change colors at random times, like eye color
