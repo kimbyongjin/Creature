@@ -1,9 +1,20 @@
  //jQuery document ready initialization stuff
  ////button and form event handlers
  // logic for determining action probably needs to go in the event handler
+var evolutionStage = 0;
 
 $(document).ready(function () {
-	loadLocalStorage();
+  loadLocalStorage();
+
+  var setDefault = function() {
+    if (localStorage.getItem('Strength of Will') === null) {
+      createEntry('Strength of Will', 50);
+      
+      loadLocalStorage();
+    }
+  }
+  setDefault();
+  setTimeout(generateWill, 60000)
 
 	$('#btn-create').on('click', function(e) {
 		var key = $('#key').val();
@@ -127,15 +138,19 @@ $(document).ready(function () {
     setTimeout(gameTick, 1000);
   }
   
-  gameTick(); // initiate game time
+  // gameTick(); // initiate game time
 
   // initiate all stat degredation / accumulation as well as movement
-  moveCreature();
-  degradeHalfLife();
-  degradeHappiness();
-  getHungry();
-  getSeptic();
 });
+
+// Evolution functionality
+
+// moveCreature();
+// degradeHalfLife();
+// degradeHappiness();
+// getHungry();
+// getSeptic();
+
 // end Document.ready initialization
 
 // update storage 
@@ -196,6 +211,18 @@ var randomMirror = function() { // generate random creture direction
 
 
 // attribute degredation and need incrementation
+var generateWill = function() {
+  var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
+  if (currentWill < 100) {
+    currentWill += 1;
+    updateEntry('Strength of Will', JSON.stringify(currentWill));
+  }
+
+  console.log('generate Will');
+  loadLocalStorage();
+  setTimeout(generateWill, 60000);
+}
+
 var degradeHalfLife = function() {
   var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
   if (currentHalfLife > 0) {
