@@ -84,6 +84,19 @@
     - embeedded sounds
 
 # Action Plan:
+
+  ### Essentials
+    [] Initialization of app for first-time users
+      [] on Document.ready => detect local storage
+      [] Initialize statrup framework
+      [] Populate local storage with necessary startup elements to allof app progression
+    
+    [] Allow clearLocalStorage() to delete app progress and start over.
+      [] Warning and 2-step varification
+      [] Possible recovery?
+
+
+
   ### Basic Formatting
     [x] Create a simple player box with colored square 'creature' in the center, at the bottom of the screen, padding to keep it off the border.
     [x] Add page background color.
@@ -92,6 +105,21 @@
     [x] Nested flexbox inside creature div for facial features
     [x] Simple eye vs more facial fetures?
     [x] Player box background color, border, shape, size, picture vs color?
+    [] Reformat table
+    [] Reformat buttons to images
+    [] Reformat status message
+    [] Variable background image
+      [] scaling issues due to differently sized images?
+      [] color scheme?
+    [] Better background color/ image for document body
+    [] General UI improvements
+    [] Button graphics, shadowing, motion, 
+    [] Hover characteristics for interactive elements
+    [] User customization?
+      [] Creature name
+      [] Welcome message
+      [] Startup instructions
+      [] User feedback
 
   ### Creture Fetures
     Attributes: 
@@ -134,7 +162,9 @@
 
   ### Evolution
     [] How many stages? 3, or 4 including an egg
-    [] start with an egg that doesn't move
+    [] Start with an egg that doesn't move
     [] Egg hatches into a random creture with its own evolution path.
     [] Different attrributres and difficulties for each creature path?
-    [] 
+    [] On evolution, add essential elements for particular evolutionary stage.
+    [] Death
+    [] On death
