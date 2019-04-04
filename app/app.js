@@ -1,85 +1,99 @@
- //jQuery document ready initialization stuff
- ////button and form event handlers
- // logic for determining action probably needs to go in the event handler
-var evolutionStage = 0;
+//jQuery document ready initialization stuff
+////button and form event handlers
+// logic for determining action probably needs to go in the event handler
+
 
 $(document).ready(function () {
   loadLocalStorage();
-
+  
   var setDefault = function() {
-    if (localStorage.getItem('Strength of Will') === null) {
-      createEntry('Strength of Will', 50);
+    if (localStorage.getItem('Stage of Evolution') === null) {
+      $(btnStart).appendTo('.button-container');
       
-      loadLocalStorage();
     }
   }
   setDefault();
-  setTimeout(generateWill, 60000)
-
+  
+  
+  
 	$('#btn-create').on('click', function(e) {
-		var key = $('#key').val();
+    var key = $('#key').val();
 		var value = $('#value').val();
 		var keyExists = localStorage.getItem(key) !== null;
-
+    
 		if (keyExists) {
-			updateStatusLabel('key already exists, please use update button instead! :D');
+      updateStatusLabel('key already exists, please use update button instead! :D');
 		} else if (key === '') {
-			updateStatusLabel('invalid input!')
+      updateStatusLabel('invalid input!')
 		}else {
-			createEntry(key, value);
+      createEntry(key, value);
 			updateStatusLabel('key created - ' + key);
 		}
-
+    
 		loadLocalStorage();
 	});
-
+  
 	$('#btn-update').on('click', function(e) {
-		var key = $('#key').val();
+    var key = $('#key').val();
 		var value = $('#value').val();
 		var existingValue = localStorage.getItem(key)
 		var keyExists = existingValue !== null;
-
+    
 		if (value === existingValue) {
-			updateStatusLabel('key not updated - that value already exists silly! xD')
+      updateStatusLabel('key not updated - that value already exists silly! xD')
 		} else if (keyExists) {
-			updateEntry(key, value);
+      updateEntry(key, value);
 			updateStatusLabel('key updated - ' + key);
 		} else if (key === '') {
-			updateStatusLabel('invalid input!')
+      updateStatusLabel('invalid input!')
 		} else {
-			updateStatusLabel('key doesn\'t exist, please use create button instead! :D');
+      updateStatusLabel('key doesn\'t exist, please use create button instead! :D');
 		}		
 		
 		loadLocalStorage();		
 	});
-
+  
 	$('#btn-delete').on('click', function(e) {
-		var key = $('#key').val();
+    var key = $('#key').val();
 		var value = $('#value').val();
 		var keyExists = localStorage.getItem(key) !== null;
-
+    
 		if (keyExists) {
-			removeEntry(key);
+      removeEntry(key);
 			updateStatusLabel('key removed - ' + key);
 		} else if (key === '') {
-			updateStatusLabel('invalid input!')
+      updateStatusLabel('invalid input!')
 		} else {
-			updateStatusLabel('key doesn\'t exist, nothing removed. :|');
+      updateStatusLabel('key doesn\'t exist, nothing removed. :|');
 		}
-
-
+    
+    
     loadLocalStorage();
   });
   
+  
+  
   // interaction buttons
-
-  $('#btn-cull').on('click', function(e) {
+  
+  $('#btn-start').on('click', function(e) {
+    $('#btn-start').detach();
+    $(btnCull).appendTo('.button-container');
+    $(imgEgg).appendTo('#creature');
+    createEntry('Stage of Evolution', evolutionStage);
+    createEntry('Strength of Will', 50);
+      
+    loadLocalStorage();
+    setTimeout(generateWill, 60000); // begin 'will' generation
+  });
+  
+  $('.button-container').on('click', '#btn-cull', function(e) {
+    console.log('clicked')
     alert('Culling your creature will reset all progress and cannot be undone!')
     localStorage.clear();
     location.reload();
   });
-
-  $('#btn-irradiate').on('click', function(e) {
+  
+  $('.button-container').on('click', '#btn-irradiate', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
     if (currentHalfLife <= 82) {
       currentHalfLife += 18;
@@ -87,11 +101,11 @@ $(document).ready(function () {
     } else {
       updateEntry('Half-Life', 100);
     }
-
+    
     loadLocalStorage();
   });
   
-  $('#btn-play').on('click', function(e) {
+  $('.button-container').on('click', '#btn-play', function(e) {
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
     if (currentHappiness <= 94) {
       currentHappiness += 6;
@@ -104,7 +118,7 @@ $(document).ready(function () {
     loadLocalStorage()
   });
   
-  $('#btn-feed').on('click', function(e) { // feeding decreases hunger 
+  $('.button-container').on('click', '#btn-feed', function(e) { // feeding decreases hunger 
     var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
     if (currentHunger >= 7) {
       currentHunger -= 7;
@@ -113,11 +127,11 @@ $(document).ready(function () {
     } else {
       updateEntry('Hunger', '0');
     }
-
+    
     loadLocalStorage()
   });
   
-  $('#btn-bath').on('click', function(e) {
+  $('.button-container').on('click', '#btn-bath', function(e) {
     var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
     if (currentSeptic >= 11) {
       currentSeptic -= 11;
@@ -126,10 +140,10 @@ $(document).ready(function () {
     } else {
       updateEntry('Septic', '0');
     }
-
+    
     loadLocalStorage();
   });
-
+  
   
   var sessionTime = 0
   var gameTick = function() { // establishes session time and game tick interval on page load
@@ -139,28 +153,48 @@ $(document).ready(function () {
   }
   
   // gameTick(); // initiate game time
-
-  // initiate all stat degredation / accumulation as well as movement
+  
 });
 
-// Evolution functionality
 
+
+  // end Document.ready initialization
+  
+// HTML elements
+// buttons
+var btnStart = '<button class="button" id="btn-start">Start</button>';
+var btnCull = '<button class="button" id="btn-cull">Cull</button>';
+var btnIrradiate = '<button class="button" id="btn-irradiate">Irradiate</button>';
+var btnPlay = '<button class="button" id="btn-play">Play</button>';
+var btnFeed = '<button class="button" id="btn-feed">Feed</button>';
+var btnBath = '<button class="button" id="btn-bath">Bath</button>';
+
+// creatures
+var imgEgg = '<img id="egg" src="images/egg.png">';
+var imgChick = '<img id="chick" src="images/chicks-349035_1280.png">';
+var imgAdolescent = '<img id="adolescent" src="images/new-hampshire-3185210_1920.png">';
+var imgRooster = '<img id="rooster" src="images/cock-3864764_1920.png">';
+
+// Evolution functionality
+var evolutionStage = 0;
+
+
+// initiate all stat degredation / accumulation as well as movement
 // moveCreature();
 // degradeHalfLife();
 // degradeHappiness();
 // getHungry();
 // getSeptic();
 
-// end Document.ready initialization
 
 // update storage 
 var loadLocalStorage = function () {
-	var keys = Object.keys(localStorage)
-	var htmlString = '';
-	for (var i = 0; i < keys.length; i++) {
-		htmlString += `<tr><td>${keys[i]}</td><td>${localStorage[keys[i]]}</tr></tr>`;
-	}
-	$('tbody').html(htmlString)
+  var keys = Object.keys(localStorage)
+var htmlString = '';
+for (var i = 0; i < keys.length; i++) {
+  htmlString += `<tr><td>${keys[i]}</td><td>${localStorage[keys[i]]}</tr></tr>`;
+}
+$('tbody').html(htmlString)
 };
 
 var updateStatusLabel = function(message) {

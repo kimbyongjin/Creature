@@ -111,25 +111,49 @@ button.button {
 
 #creature {
 	display: flex;
-	height: 150px;
-	width: 150px;
+	height: 130px;
+	width: 160px;
 	padding: 70px;
-
 }
 
 #egg {
+	/* 
+	needs container height: 130px and width: 160px
+	*/
 	height: 100%;
 	width: 100%;
 	transform: scaleX(1);
+	/* Egg image obtained with free license, no attribution necessary */
 }
 
 #chick {
+	/* 
+	needs container height: 150px and width: 150px 
+	*/
 	height: 100%;
 	width: 100%;
-	transform: scaleX(-1);
+	transform: scaleX(1);
 	/*
 	Creture image file: chicks-349035_1280.jpg
 	Obtained with free for commercial use license.
 	https://pixabay.com/service/license/
 	*/
+}
+
+#adolescent {
+	/*
+	needs container height: 260px and width: 155px
+	*/
+	height: 100%;
+	width: 100%;
+	transform: scaleX(1);
+}
+
+#rooster {
+	/*
+	needs container height: 230px and width: 230px
+	*/
+	height: 100%;
+	width: 100%;
+	transform: scaleX(1);
 }

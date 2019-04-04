@@ -87,13 +87,14 @@
 
   ### Essentials
     [] Initialization of app for first-time users
-      [] on Document.ready => detect local storage
-      [] Initialize statrup framework
-      [] Populate local storage with necessary startup elements to allof app progression
+      [x] on Document.ready => detect local storage
+      [x] Initialize statrup framework
+      [] Populate local storage with necessary startup elements to allow app progression
     
     [] Allow clearLocalStorage() to delete app progress and start over.
+      [x] initial clear and page reload
       [] Warning and 2-step varification
-      [] Possible recovery?
+      [s] Possible recovery? Too complicated
 
 
 
@@ -105,7 +106,7 @@
     [x] Nested flexbox inside creature div for facial features
     [x] Simple eye vs more facial fetures?
     [x] Player box background color, border, shape, size, picture vs color?
-    [] Reformat table
+    [x] Reformat table
     [] Reformat buttons to images
     [] Reformat status message
     [] Variable background image
@@ -142,7 +143,7 @@
     [x] Function to generate random value
     [x] Function to generate random hex color
     [] Change colors at random times, like eye color
-    [] Generate currency? 'Will'
+    [x] Generate currency? 'Will'
 
   ### Interaction Triggers
     Irradiate:
@@ -167,7 +168,7 @@
     [] Different attrributres and difficulties for each creature path?
     [] On evolution, add essential elements for particular evolutionary stage.
     [] Death
-    [] On death - 'Cull'
+    [x] On 'Cull' => clear local storage and force reolad page
 
 
 NOTES:
