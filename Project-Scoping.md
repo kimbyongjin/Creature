@@ -167,4 +167,10 @@
     [] Different attrributres and difficulties for each creature path?
     [] On evolution, add essential elements for particular evolutionary stage.
     [] Death
-    [] On death
+    [] On death - 'Cull'
+
+
+NOTES:
+updateStatusLabel function adds a status message to the div with ID #status label
+ - need text fade and general styling
+

@@ -62,6 +62,12 @@ $(document).ready(function () {
   
   // interaction buttons
 
+  $('#btn-cull').on('click', function(e) {
+    alert('Culling your creature will reset all progress and cannot be undone!')
+    localStorage.clear();
+    location.reload();
+  });
+
   $('#btn-irradiate').on('click', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
     if (currentHalfLife <= 82) {
@@ -145,6 +151,13 @@ var loadLocalStorage = function () {
 var updateStatusLabel = function(message) {
 	$('#statusLabel').text('Status: ' + message);
 }
+/*
+add status fade after timer
+status feedback after trigger click
+death warning
+evolution celebration
+status bar styling
+*/
 
 
 // jQuery animation based on session time
