@@ -101,10 +101,10 @@
       [x] halflife -> degrades with time & increases with interaction 'irradiate'
 
     Interactions:
-      [x] feed -> decreases hunger - increase septic
-      [x] play -> increases happiness - increase septic
-      [x] bath -> decreases septic - decrease halflife
-      [x] irradiate -> increases haflife - cost money?
+      [x] feed -> decreases hunger - increase septic*
+      [x] play -> increases happiness - increase septic*
+      [x] bath -> decreases septic - decrease halflife*
+      [x] irradiate -> increases haflife - cost money?*
 
   ### Basic setTimeout functionality
     [x] Set game tick value of 1 tick to equal 1000 ms standard
@@ -114,7 +114,7 @@
     [x] Function to generate random value
     [x] Function to generate random hex color
     [] Change colors at random times, like eye color
-    [] Generate currency?
+    [] Generate currency? 'Will'
 
   ### Interaction Triggers
     Irradiate:
@@ -125,4 +125,16 @@
       [] wash of blue across screen
     Irradiate:
       [] wash of orange/yellow across screen
-    
+  
+  ### Balancing
+    [] Attribute degredation / need:
+    [] Cost in 'Will' to perform tasks
+      - Does the 'Will' generation happen quickly enough to keep the creature alive?
+      - Does the offset of irradiation and bathing match the need of the creture to stay alive?
+
+  ### Evolution
+    [] How many stages? 3, or 4 including an egg
+    [] start with an egg that doesn't move
+    [] Egg hatches into a random creture with its own evolution path.
+    [] Different attrributres and difficulties for each creature path?
+    [] 
