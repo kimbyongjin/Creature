@@ -18,7 +18,8 @@ $(document).ready(function () {
   var welcomeMsg3 = '<p>You will be awarded for your patience, love and care.</p>';
   var welcomeMsg4 = '<p>You will be penalized for your laziness and neglect.</p>';
   var welcomeMsg5 = '<p>Do you have the Strength of Will to succeed?</p>';
-  var welcomeMsg6 = '<p id="start-line">Press Start to begin!</p>';
+  var welcomeMsg6 = '<p>Give it time...</p>';
+  var welcomeMsg7 = '<p id="start-line">Press Start to begin!</p>';
 
   // Populate page for appropriate 
   var setDefault = function() {
@@ -30,6 +31,7 @@ $(document).ready(function () {
       $('#status-label').append(welcomeMsg4);
       $('#status-label').append(welcomeMsg5);
       $('#status-label').append(welcomeMsg6);
+      $('#status-label').append(welcomeMsg7);
     }
     if (localStorage.getItem('Stage of Evolution') === '0') {
       $('.button-container').append(btnCull, btnIrradiate);
@@ -292,9 +294,9 @@ var evolveToChick = function() {
   $('.button-container').append(btnPlay, btnFeed, btnBath);
   $('#creature').css('height', '150px');
   $('#creature').css('width', '150px');
-  createEntry('Happiness', '71');
-  createEntry('Hunger', '23');
-  createEntry('Septic', '27');
+  createEntry('Happiness', '43');
+  createEntry('Hunger', '52');
+  createEntry('Septic', '41');
   moveCreature();
 
   degradeHappiness();
