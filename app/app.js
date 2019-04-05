@@ -13,7 +13,7 @@ $(document).ready(function () {
   */
   
   // Welcome message
-  var welcomeMsg1 = '<p>Hello! If this is your first time trying creature, be warned.</p>';
+  var welcomeMsg1 = '<p>If this is your first time trying creature, be warned.</p>';
   var welcomeMsg2 = '<p>Death can come swiftly, and without warning!</p>';
   var welcomeMsg3 = '<p>You will be awarded for your patience, love and care.</p>';
   var welcomeMsg4 = '<p>You will be penalized for your laziness and neglect.</p>';
