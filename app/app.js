@@ -9,80 +9,112 @@ $(document).ready(function () {
   var setDefault = function() {
     if (localStorage.getItem('Stage of Evolution') === null) {
       $(btnStart).appendTo('.button-container');
-      
+    }
+    if (localStorage.getItem('Stage of Evolution') === '0') {
+      $('.button-container').append(btnCull, btnIrradiate);
+      $('#creature').append(imgEgg);
+    }
+    if (localStorage.getItem('Stage of Evolution') === '1') {
+      $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
+      $('#creature').append(imgChick);
+      moveCreature();
+      degradeHalfLife();
+      degradeHappiness();
+      getHungry();
+      getSeptic();
+    }
+    if (localStorage.getItem('Stage of Evolution') === '2') {
+      $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
+      $('#creature').append(imgAdolescent);
+      moveCreature();
+      degradeHalfLife();
+      degradeHappiness();
+      getHungry();
+      getSeptic();
+    }
+    if (localStorage.getItem('Stage of Evolution') === '3') {
+      $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
+      $('#creature').append(imgRooster);
+      moveCreature();
+      degradeHalfLife();
+      degradeHappiness();
+      getHungry();
+      getSeptic();
     }
   }
   setDefault();
   
   
   
-	$('#btn-create').on('click', function(e) {
-    var key = $('#key').val();
-		var value = $('#value').val();
-		var keyExists = localStorage.getItem(key) !== null;
+	// $('#btn-create').on('click', function(e) {
+  //   var key = $('#key').val();
+	// 	var value = $('#value').val();
+	// 	var keyExists = localStorage.getItem(key) !== null;
     
-		if (keyExists) {
-      updateStatusLabel('key already exists, please use update button instead! :D');
-		} else if (key === '') {
-      updateStatusLabel('invalid input!')
-		}else {
-      createEntry(key, value);
-			updateStatusLabel('key created - ' + key);
-		}
+	// 	if (keyExists) {
+  //     updateStatusLabel('key already exists, please use update button instead! :D');
+	// 	} else if (key === '') {
+  //     updateStatusLabel('invalid input!')
+	// 	}else {
+  //     createEntry(key, value);
+	// 		updateStatusLabel('key created - ' + key);
+	// 	}
     
-		loadLocalStorage();
-	});
+	// 	loadLocalStorage();
+	// });
   
-	$('#btn-update').on('click', function(e) {
-    var key = $('#key').val();
-		var value = $('#value').val();
-		var existingValue = localStorage.getItem(key)
-		var keyExists = existingValue !== null;
+	// $('#btn-update').on('click', function(e) {
+  //   var key = $('#key').val();
+	// 	var value = $('#value').val();
+	// 	var existingValue = localStorage.getItem(key)
+	// 	var keyExists = existingValue !== null;
     
-		if (value === existingValue) {
-      updateStatusLabel('key not updated - that value already exists silly! xD')
-		} else if (keyExists) {
-      updateEntry(key, value);
-			updateStatusLabel('key updated - ' + key);
-		} else if (key === '') {
-      updateStatusLabel('invalid input!')
-		} else {
-      updateStatusLabel('key doesn\'t exist, please use create button instead! :D');
-		}		
+	// 	if (value === existingValue) {
+  //     updateStatusLabel('key not updated - that value already exists silly! xD')
+	// 	} else if (keyExists) {
+  //     updateEntry(key, value);
+	// 		updateStatusLabel('key updated - ' + key);
+	// 	} else if (key === '') {
+  //     updateStatusLabel('invalid input!')
+	// 	} else {
+  //     updateStatusLabel('key doesn\'t exist, please use create button instead! :D');
+	// 	}		
 		
-		loadLocalStorage();		
-	});
+	// 	loadLocalStorage();		
+	// });
   
-	$('#btn-delete').on('click', function(e) {
-    var key = $('#key').val();
-		var value = $('#value').val();
-		var keyExists = localStorage.getItem(key) !== null;
+	// $('#btn-delete').on('click', function(e) {
+  //   var key = $('#key').val();
+	// 	var value = $('#value').val();
+	// 	var keyExists = localStorage.getItem(key) !== null;
     
-		if (keyExists) {
-      removeEntry(key);
-			updateStatusLabel('key removed - ' + key);
-		} else if (key === '') {
-      updateStatusLabel('invalid input!')
-		} else {
-      updateStatusLabel('key doesn\'t exist, nothing removed. :|');
-		}
+	// 	if (keyExists) {
+  //     removeEntry(key);
+	// 		updateStatusLabel('key removed - ' + key);
+	// 	} else if (key === '') {
+  //     updateStatusLabel('invalid input!')
+	// 	} else {
+  //     updateStatusLabel('key doesn\'t exist, nothing removed. :|');
+	// 	}
     
     
-    loadLocalStorage();
-  });
-  
+  //   loadLocalStorage();
+  // });
   
   
   // interaction buttons
   
-  $('#btn-start').on('click', function(e) {
+  $('.button-container').on('click', '#btn-start', function(e) {
     $('#btn-start').detach();
-    $(btnCull).appendTo('.button-container');
-    $(imgEgg).appendTo('#creature');
-    createEntry('Stage of Evolution', evolutionStage);
+    $('.button-container').append(btnCull);
+    $('.button-container').append(btnIrradiate);
+    $('#creature').append(imgEgg);
     createEntry('Strength of Will', 50);
+    createEntry('Stage of Evolution', evolutionStage);
+    createEntry('Half-Life', 50);
       
     loadLocalStorage();
+    setTimeout(degradeHalfLife, 45000);
     setTimeout(generateWill, 60000); // begin 'will' generation
   });
   
@@ -95,8 +127,8 @@ $(document).ready(function () {
   
   $('.button-container').on('click', '#btn-irradiate', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
-    if (currentHalfLife <= 82) {
-      currentHalfLife += 18;
+    if (currentHalfLife <= 92) {
+      currentHalfLife += 9;
       updateEntry('Half-Life', JSON.stringify(currentHalfLife))
     } else {
       updateEntry('Half-Life', 100);
@@ -144,22 +176,44 @@ $(document).ready(function () {
     loadLocalStorage();
   });
   
-  
+  var evolutionStage = 0;
   var sessionTime = 0
+
   var gameTick = function() { // establishes session time and game tick interval on page load
     console.log('session time: ' + sessionTime)
     sessionTime++
     setTimeout(gameTick, 1000);
+    if (localStorage.getItem('Half-Life') === '100') {
+      if (localStorage.getItem('Stage of Evolution') === '0') {
+        updateEntry('Half-Life', 15);
+        updateEntry('Stage of Evolution', '1')
+        evolutionStage++;
+        evolveToChick();
+        loadLocalStorage();
+      }
+      if (localStorage.getItem('Stage of Evolution') === '1') {
+        updateEntry('Half-Life', 15);
+        updateEntry('Stage of Evolution', '2')
+        evolutionStage++;
+        loadLocalStorage();
+        evolveToAdolescent();
+      }
+      if (localStorage.getItem('Stage of Evolution') === '2') {
+        updateEntry('Half-Life', 15);
+        updateEntry('Stage of Evolution', '3')
+        evolutionStage++;
+        loadLocalStorage();
+        evolveToRooster();
+      }
+    }
   }
   
-  // gameTick(); // initiate game time
+  gameTick(); // initiate game time and check on game tick for evolution criteria
   
 });
 
+// end Document.ready initialization
 
-
-  // end Document.ready initialization
-  
 // HTML elements
 // buttons
 var btnStart = '<button class="button" id="btn-start">Start</button>';
@@ -176,16 +230,30 @@ var imgAdolescent = '<img id="adolescent" src="images/new-hampshire-3185210_1920
 var imgRooster = '<img id="rooster" src="images/cock-3864764_1920.png">';
 
 // Evolution functionality
-var evolutionStage = 0;
+var evolveToChick = function() {
+  $('#egg').detach();
+  $('#creature').append(imgChick);
+  $('.button-container').append(btnPlay, btnFeed, btnBath);
 
+  createEntry('Happiness', 50);
+  createEntry('Hunger', 50);
+  createEntry('Septic', 50);
 
-// initiate all stat degredation / accumulation as well as movement
-// moveCreature();
-// degradeHalfLife();
-// degradeHappiness();
-// getHungry();
-// getSeptic();
+  moveCreature();
+  degradeHappiness();
+  getHungry();
+  getSeptic();
+}
 
+var evolveToAdolescent = function() {
+  $('#chick').detach();
+  $('#creature').append(imgAdolescent);
+}
+
+var evolveToRooster = function() {
+  $('#adolescent').detach();
+  $('#creature').append(imgRooster);
+}
 
 // update storage 
 var loadLocalStorage = function () {
