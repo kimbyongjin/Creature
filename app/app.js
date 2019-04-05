@@ -176,8 +176,24 @@ $(document).ready(function () {
     sessionTime++
     setTimeout(gameTick, 1000);
 
-    // need to add death case and death messages
+    // Death
+    if (currentHappiness === 0) {
+      alert('Your neglected little creature died of lonelieness!\nMake sure to keep your creature entertained.\nTry again!\n ')
+      localStorage.clear();
+      location.reload();
+    }
+    if (currentHunger === 100) {
+      alert('Your ravenous little creature died of hunger!\nDon\'t forget to feed the little one.\nTry again!\n \n ')
+      localStorage.clear();
+      location.reload();
+    }
+    if (currentSeptic === 100) {
+      alert('Your filthy little creature died of septic shock!\nMake sure to keep your little friend bathed.\nTry again!\n ')
+      localStorage.clear();
+      location.reload();
+    }
 
+    // Evolution
     if (localStorage.getItem('Half-Life') === '100') {
       if (localStorage.getItem('Stage of Evolution') === '0') {
         updateEntry('Half-Life', 20);
@@ -185,6 +201,7 @@ $(document).ready(function () {
         evolutionStage++;
         evolveToChick();
         loadLocalStorage();
+        alert('Your egg hatched!\n \nMeet your new baby chick!\n ');
       }
       if (currentHappiness >= 75 && currentHunger <= 35 && currentSeptic <= 40) {
         if (localStorage.getItem('Stage of Evolution') === '1') {
@@ -193,12 +210,14 @@ $(document).ready(function () {
           evolutionStage++;
           loadLocalStorage();
           evolveToAdolescent();
+          alert('Your chick grew up into an adolescent!\n');
         } else if (localStorage.getItem('Stage of Evolution') === '2') {
           updateEntry('Half-Life', 20);
           updateEntry('Stage of Evolution', '3');
           evolutionStage++;
           loadLocalStorage();
           evolveToRooster();
+          alert('Your young chicken is now a fully grown rooster!\n');
         }
       }
     }
@@ -237,9 +256,9 @@ var evolveToChick = function() {
   $('.button-container').append(btnPlay, btnFeed, btnBath);
   $('#creature').css('height', '150px');
   $('#creature').css('width', '150px');
-  createEntry('Happiness', 50);
-  createEntry('Hunger', 50);
-  createEntry('Septic', 50);
+  createEntry('Happiness', 71);
+  createEntry('Hunger', 23);
+  createEntry('Septic', 27);
   moveCreature();
   degradeHappiness();
   getHungry();
