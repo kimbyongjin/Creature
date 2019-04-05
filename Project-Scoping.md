@@ -91,7 +91,7 @@
       [x] Initialize statrup framework
       [] Populate local storage with necessary startup elements to allow app progression
     
-    [] Allow clearLocalStorage() to delete app progress and start over.
+    [x] Allow clearLocalStorage() to delete app progress and start over.
       [x] initial clear and page reload
       [] Warning and 2-step varification
       [s] Possible recovery? Too complicated
@@ -162,11 +162,11 @@
       - Does the offset of irradiation and bathing match the need of the creture to stay alive?
 
   ### Evolution
-    [] How many stages? 3, or 4 including an egg
-    [] Start with an egg that doesn't move
+    [x] How many stages? 3, or 4 including an egg
+    [x] Start with an egg that doesn't move
     [] Egg hatches into a random creture with its own evolution path.
     [] Different attrributres and difficulties for each creature path?
-    [] On evolution, add essential elements for particular evolutionary stage.
+    [x] On evolution, add essential elements for particular evolutionary stage.
     [] Death
     [x] On 'Cull' => clear local storage and force reolad page
 

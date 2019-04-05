@@ -190,15 +190,13 @@ $(document).ready(function () {
         evolutionStage++;
         evolveToChick();
         loadLocalStorage();
-      }
-      if (localStorage.getItem('Stage of Evolution') === '1') {
+      } else if (localStorage.getItem('Stage of Evolution') === '1') {
         updateEntry('Half-Life', 15);
         updateEntry('Stage of Evolution', '2')
         evolutionStage++;
         loadLocalStorage();
         evolveToAdolescent();
-      }
-      if (localStorage.getItem('Stage of Evolution') === '2') {
+      } else if (localStorage.getItem('Stage of Evolution') === '2') {
         updateEntry('Half-Life', 15);
         updateEntry('Stage of Evolution', '3')
         evolutionStage++;
@@ -234,6 +232,8 @@ var evolveToChick = function() {
   $('#egg').detach();
   $('#creature').append(imgChick);
   $('.button-container').append(btnPlay, btnFeed, btnBath);
+  $('#creature').css('height', '150px');
+  $('#creature').css('width', '150px');
 
   createEntry('Happiness', 50);
   createEntry('Hunger', 50);
@@ -248,11 +248,18 @@ var evolveToChick = function() {
 var evolveToAdolescent = function() {
   $('#chick').detach();
   $('#creature').append(imgAdolescent);
+  $('#creature').css('height', '260px');
+  $('#creature').css('width', '155px');
+
+
 }
 
 var evolveToRooster = function() {
   $('#adolescent').detach();
   $('#creature').append(imgRooster);
+  $('#creature').css('height', '230px');
+  $('#creature').css('width', '230px');
+
 }
 
 // update storage 
@@ -281,7 +288,7 @@ status bar styling
 
 var moveCreature = function() { // random movement every 1.5 game ticks.
   $('.play-screen-container').css('justify-content', randomJustify);
-  $('#chick').css('transform', randomMirror);
+  $('#creature').css('transform', randomMirror);
   $('#creature').css('padding', randomPadding);
   setTimeout(moveCreature, 1500);
 }
