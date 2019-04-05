@@ -1,11 +1,13 @@
-//jQuery document ready initialization stuff
-////button and form event handlers
-// logic for determining action probably needs to go in the event handler
-
-
 $(document).ready(function () {
+
+  // Loads empty for new user or recalls save state for current user
   loadLocalStorage();
   
+  /*
+  Set default / saved state on page load
+  */
+
+  // Populate page for appropriate 
   var setDefault = function() {
     if (localStorage.getItem('Stage of Evolution') === null) {
       $(btnStart).appendTo('.button-container');
@@ -52,80 +54,26 @@ $(document).ready(function () {
 
   setDefault(); // load stored progress
   
-  
-  
-	// $('#btn-create').on('click', function(e) {
-  //   var key = $('#key').val();
-	// 	var value = $('#value').val();
-	// 	var keyExists = localStorage.getItem(key) !== null;
-    
-	// 	if (keyExists) {
-  //     updateStatusLabel('key already exists, please use update button instead! :D');
-	// 	} else if (key === '') {
-  //     updateStatusLabel('invalid input!')
-	// 	}else {
-  //     createEntry(key, value);
-	// 		updateStatusLabel('key created - ' + key);
-	// 	}
-    
-	// 	loadLocalStorage();
-	// });
-  
-	// $('#btn-update').on('click', function(e) {
-  //   var key = $('#key').val();
-	// 	var value = $('#value').val();
-	// 	var existingValue = localStorage.getItem(key)
-	// 	var keyExists = existingValue !== null;
-    
-	// 	if (value === existingValue) {
-  //     updateStatusLabel('key not updated - that value already exists silly! xD')
-	// 	} else if (keyExists) {
-  //     updateEntry(key, value);
-	// 		updateStatusLabel('key updated - ' + key);
-	// 	} else if (key === '') {
-  //     updateStatusLabel('invalid input!')
-	// 	} else {
-  //     updateStatusLabel('key doesn\'t exist, please use create button instead! :D');
-	// 	}		
-		
-	// 	loadLocalStorage();		
-	// });
-  
-	// $('#btn-delete').on('click', function(e) {
-  //   var key = $('#key').val();
-	// 	var value = $('#value').val();
-	// 	var keyExists = localStorage.getItem(key) !== null;
-    
-	// 	if (keyExists) {
-  //     removeEntry(key);
-	// 		updateStatusLabel('key removed - ' + key);
-	// 	} else if (key === '') {
-  //     updateStatusLabel('invalid input!')
-	// 	} else {
-  //     updateStatusLabel('key doesn\'t exist, nothing removed. :|');
-	// 	}
-    
-    
-  //   loadLocalStorage();
-  // });
-  
-  
-  // interaction buttons
-  
+  /*
+  Interaction buttons
+  */
+
+  // Button Start
   $('.button-container').on('click', '#btn-start', function(e) {
     $('#btn-start').detach();
     $('.button-container').append(btnCull);
     $('.button-container').append(btnIrradiate);
     $('#creature').append(imgEgg);
-    createEntry('Strength of Will', 50);
+    createEntry('Strength of Will', 0);
     createEntry('Stage of Evolution', evolutionStage);
-    createEntry('Half-Life', 50);
+    createEntry('Half-Life', 70);
       
     loadLocalStorage();
     setTimeout(degradeHalfLife, 45000);
     setTimeout(generateWill, 60000); // begin 'will' generation
   });
   
+  // Button Cull
   $('.button-container').on('click', '#btn-cull', function(e) {
     console.log('clicked')
     alert('Culling your creature will reset all progress and cannot be undone!')
@@ -133,47 +81,50 @@ $(document).ready(function () {
     location.reload();
   });
   
+  // Button Irradiate
   $('.button-container').on('click', '#btn-irradiate', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 18) {
-      if (currentHalfLife <= 92) {
-        currentHalfLife += 9;
+    if (currentWill > 9) {
+      if (currentHalfLife <= 87) {
+        currentHalfLife += 13;
         updateEntry('Half-Life', JSON.stringify(currentHalfLife))
       } else {
         updateEntry('Half-Life', 100);
       }
-      currentWill -= 18;
+      currentWill -= 9;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage();
   });
   
+  // Button Play
   $('.button-container').on('click', '#btn-play', function(e) {
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 5) {
-      if (currentHappiness <= 94) {
-        currentHappiness += 6;
+    if (currentWill > 6) {
+      if (currentHappiness <= 89) {
+        currentHappiness += 11;
         // play message / sprite
         updateEntry('Happiness', JSON.stringify(currentHappiness));
       } else {
         updateEntry('Happiness', '100');
       }
-      currentWill -= 5;
+      currentWill -= 6;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage()
   });
   
+  // Button Feed
   $('.button-container').on('click', '#btn-feed', function(e) { // feeding decreases hunger 
     var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
     if (currentWill > 7) {
-      if (currentHunger >= 7) {
-        currentHunger -= 7;
+      if (currentHunger >= 9) {
+        currentHunger -= 9;
         // feed message / sprite
         updateEntry('Hunger', JSON.stringify(currentHunger))
       } else {
@@ -186,24 +137,29 @@ $(document).ready(function () {
     loadLocalStorage()
   });
   
+  // Button Bath
   $('.button-container').on('click', '#btn-bath', function(e) {
     var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 14) {
-      if (currentSeptic >= 11) {
-        currentSeptic -= 11;
+    if (currentWill > 11) {
+      if (currentSeptic >= 13) {
+        currentSeptic -= 13;
         // play message / sprite
         updateEntry('Septic', JSON.stringify(currentSeptic));
       } else {
         updateEntry('Septic', '0');
       }
-      currentWill -= 14;
+      currentWill -= 11;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage();
   });
   
+  /*
+  App timer and status checker
+  */
+
   var evolutionStage = 0;
   var sessionTime = 0
 
@@ -218,22 +174,23 @@ $(document).ready(function () {
     // need to add death case and death messages
 
     if (localStorage.getItem('Half-Life') === '100') {
-      if (currentHappiness >= 80 && currentHunger <= 30 && currentSeptic <= 40) {
-        if (localStorage.getItem('Stage of Evolution') === '0') {
-          updateEntry('Half-Life', 15);
-          updateEntry('Stage of Evolution', '1')
-          evolutionStage++;
-          evolveToChick();
-          loadLocalStorage();
-        } else if (localStorage.getItem('Stage of Evolution') === '1') {
-          updateEntry('Half-Life', 15);
-          updateEntry('Stage of Evolution', '2')
+      if (localStorage.getItem('Stage of Evolution') === '0') {
+        updateEntry('Half-Life', 20);
+        updateEntry('Stage of Evolution', '1')
+        evolutionStage++;
+        evolveToChick();
+        loadLocalStorage();
+      }
+      if (currentHappiness >= 75 && currentHunger <= 35 && currentSeptic <= 40) {
+        if (localStorage.getItem('Stage of Evolution') === '1') {
+          updateEntry('Half-Life', 20);
+          updateEntry('Stage of Evolution', '2');
           evolutionStage++;
           loadLocalStorage();
           evolveToAdolescent();
         } else if (localStorage.getItem('Stage of Evolution') === '2') {
-          updateEntry('Half-Life', 15);
-          updateEntry('Stage of Evolution', '3')
+          updateEntry('Half-Life', 20);
+          updateEntry('Stage of Evolution', '3');
           evolutionStage++;
           loadLocalStorage();
           evolveToRooster();
@@ -245,10 +202,12 @@ $(document).ready(function () {
   gameTick(); // initiate game time and check on game tick for evolution criteria
   
 });
-
 // end Document.ready initialization
 
-// HTML elements
+/*
+HTML elements
+*/
+
 // buttons
 var btnStart = '<button class="button" id="btn-start">Start</button>';
 var btnCull = '<button class="button" id="btn-cull">Cull</button>';
@@ -257,13 +216,16 @@ var btnPlay = '<button class="button" id="btn-play">Play</button>';
 var btnFeed = '<button class="button" id="btn-feed">Feed</button>';
 var btnBath = '<button class="button" id="btn-bath">Bath</button>';
 
-// creatures
+// creature images
 var imgEgg = '<img id="egg" src="images/egg.png">';
 var imgChick = '<img id="chick" src="images/chicks-349035_1280.png">';
 var imgAdolescent = '<img id="adolescent" src="images/new-hampshire-3185210_1920.png">';
 var imgRooster = '<img id="rooster" src="images/cock-3864764_1920.png">';
 
-// Evolution functionality
+/*
+Evolution functionality
+*/
+
 var evolveToChick = function() {
   $('#egg').detach();
   $('#creature').append(imgChick);
@@ -293,7 +255,10 @@ var evolveToRooster = function() {
   $('#creature').css('width', '230px');
 }
 
-// update storage 
+/*
+Update storage 
+*/
+
 var loadLocalStorage = function () {
   var keys = Object.keys(localStorage)
 var htmlString = '';
@@ -303,19 +268,14 @@ for (var i = 0; i < keys.length; i++) {
 $('tbody').html(htmlString)
 };
 
+// would like to use status bar a little, with some text fading implementation
 var updateStatusLabel = function(message) {
 	$('#statusLabel').text('Status: ' + message);
 }
+
 /*
-add status fade after timer
-status feedback after trigger click
-death warning
-evolution celebration
-status bar styling
+jQuery animation based on session time
 */
-
-
-// jQuery animation based on session time
 
 var moveCreature = function() { // random movement every 1.5 game ticks.
   $('.play-screen-container').css('justify-content', randomJustify);
@@ -349,8 +309,10 @@ var randomMirror = function() { // generate random creture direction
 }
 
 
+/*
+Attribute degredation and need incrementation
+*/
 
-// attribute degredation and need incrementation
 var generateWill = function() {
   var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
   if (currentWill < 100) {
@@ -372,7 +334,7 @@ var degradeHalfLife = function() {
 
   console.log('degrade half-life')
   loadLocalStorage();
-  setTimeout(degradeHalfLife, 45000);
+  setTimeout(degradeHalfLife, 63000);
 }
 
 var degradeHappiness = function() {
@@ -384,7 +346,7 @@ var degradeHappiness = function() {
 
   console.log('degrade happy')
   loadLocalStorage()
-  setTimeout(degradeHappiness, 30000);
+  setTimeout(degradeHappiness, 53000);
 }
 
 var getHungry = function() {
@@ -396,7 +358,7 @@ var getHungry = function() {
 
   console.log('get hungry')
   loadLocalStorage()
-  setTimeout(getHungry, 28000);
+  setTimeout(getHungry, 58000);
 }
 
 var getSeptic = function() {
@@ -408,46 +370,32 @@ var getSeptic = function() {
 
   console.log('get septic')
   loadLocalStorage();
-  setTimeout(getSeptic, 52000);
+  setTimeout(getSeptic, 65000);
 }
 
 /*
-
-When an input element is given a name, that name becomes a property of the owning form element's HTMLFormElement.elements property. 
-That means if you have an input whose name is set to guest and another whose name is hat-size, the following code can be used:
-
-let form = document.querySelector("form");
-let guestName = form.elements.guest;
-let hatSize = form.elements["hat-size"];
+Local storage manipulation stuff
 */
 
-/*
-PAGE CONTENT STUFF
-*/
-//something to update the table every time localStorage changes
-
-//localStorage stuff
-//https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-
-////create new entry
-//localStorage.setItem(key, value)
+//create new entry
 var createEntry = function(key, value) {
 	return localStorage.setItem(key, value);
 }
 
-////Update existing entry
-//localStorage.setItem(key, value)
+// update existing entry
+
 var updateEntry = function(key, value) {
 	return localStorage.setItem(key, value);
 }
 
-////delete existing entry
-//localStorage.removeItem(key)
+//delete existing entry
 var removeEntry = function(key) {
 	return localStorage.removeItem(key);
 }
 
-// Random val generation functions
+/*
+Random val generation functions
+*/
 
 var generateRandom = function(max) { // return a random integer between 0 (inclusive) and max (exclusive)
   return Math.floor(Math.random() * Math.floor(max));
@@ -457,4 +405,3 @@ var randomColor = function() { // generates random hex color value including #
   var hexNum = Math.floor(Math.random() * 16777215).toString(16);
   return '#' + hexNum;
 }
-

@@ -157,7 +157,7 @@
   
   ### Balancing
     [] Attribute degredation / need:
-    [] Cost in 'Will' to perform tasks
+    [x] Cost in 'Will' to perform tasks
       - Does the 'Will' generation happen quickly enough to keep the creature alive?
       - Does the offset of irradiation and bathing match the need of the creture to stay alive?
 

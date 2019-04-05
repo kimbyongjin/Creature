@@ -1,17 +1,5 @@
-/*
-- [ ] UI/UX considerations (how are we going to use this)
-
-nice contrasting color pallet
-a form that doenst look like its from a circa 2001 webpage
-
-
-advanced content
-state changing styling
-*/
-
-/*
-	FLEXBOX CONTAINER
-	guide: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+/* 
+Overall page styling
 */
 
 body {
@@ -56,6 +44,7 @@ body {
 /*
 	TABLE STYLING 
 */
+
 table {
 	width: 400px;
 	margin-left: 30px;
@@ -77,6 +66,10 @@ label {
     width: 80px;
 }
 
+/* 
+Button Styling
+*/
+
 button.button {
 	margin: 10px;
 	padding: 5px 10px 5px 10px;
@@ -87,7 +80,7 @@ button.button {
 }
 
 /* 
-	creature styling
+Creature styling
 */
 
 #creature {
@@ -96,6 +89,10 @@ button.button {
 	width: 160px;
 	padding: 70px;
 }
+
+/* 
+Image styling
+*/
 
 #egg {
 	/* 
