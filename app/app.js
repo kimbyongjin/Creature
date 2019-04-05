@@ -13,10 +13,13 @@ $(document).ready(function () {
     if (localStorage.getItem('Stage of Evolution') === '0') {
       $('.button-container').append(btnCull, btnIrradiate);
       $('#creature').append(imgEgg);
+      degradeHalfLife();
     }
     if (localStorage.getItem('Stage of Evolution') === '1') {
       $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
       $('#creature').append(imgChick);
+      $('#creature').css('height', '150px');
+      $('#creature').css('width', '150px');
       moveCreature();
       degradeHalfLife();
       degradeHappiness();
@@ -26,6 +29,8 @@ $(document).ready(function () {
     if (localStorage.getItem('Stage of Evolution') === '2') {
       $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
       $('#creature').append(imgAdolescent);
+      $('#creature').css('height', '260px');
+      $('#creature').css('width', '155px');
       moveCreature();
       degradeHalfLife();
       degradeHappiness();
@@ -35,6 +40,8 @@ $(document).ready(function () {
     if (localStorage.getItem('Stage of Evolution') === '3') {
       $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
       $('#creature').append(imgRooster);
+      $('#creature').css('height', '230px');
+      $('#creature').css('width', '230px');
       moveCreature();
       degradeHalfLife();
       degradeHappiness();
@@ -42,7 +49,8 @@ $(document).ready(function () {
       getSeptic();
     }
   }
-  setDefault();
+
+  setDefault(); // load stored progress
   
   
   
@@ -127,11 +135,16 @@ $(document).ready(function () {
   
   $('.button-container').on('click', '#btn-irradiate', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
-    if (currentHalfLife <= 92) {
-      currentHalfLife += 9;
-      updateEntry('Half-Life', JSON.stringify(currentHalfLife))
-    } else {
-      updateEntry('Half-Life', 100);
+    var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
+    if (currentWill > 18) {
+      if (currentHalfLife <= 92) {
+        currentHalfLife += 9;
+        updateEntry('Half-Life', JSON.stringify(currentHalfLife))
+      } else {
+        updateEntry('Half-Life', 100);
+      }
+      currentWill -= 18;
+      updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage();
@@ -139,12 +152,17 @@ $(document).ready(function () {
   
   $('.button-container').on('click', '#btn-play', function(e) {
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
-    if (currentHappiness <= 94) {
-      currentHappiness += 6;
-      // play message / sprite
-      updateEntry('Happiness', JSON.stringify(currentHappiness));
-    } else {
-      updateEntry('Happiness', '100');
+    var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
+    if (currentWill > 5) {
+      if (currentHappiness <= 94) {
+        currentHappiness += 6;
+        // play message / sprite
+        updateEntry('Happiness', JSON.stringify(currentHappiness));
+      } else {
+        updateEntry('Happiness', '100');
+      }
+      currentWill -= 5;
+      updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage()
@@ -152,12 +170,17 @@ $(document).ready(function () {
   
   $('.button-container').on('click', '#btn-feed', function(e) { // feeding decreases hunger 
     var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
-    if (currentHunger >= 7) {
-      currentHunger -= 7;
-      // feed message / sprite
-      updateEntry('Hunger', JSON.stringify(currentHunger))
-    } else {
-      updateEntry('Hunger', '0');
+    var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
+    if (currentWill > 7) {
+      if (currentHunger >= 7) {
+        currentHunger -= 7;
+        // feed message / sprite
+        updateEntry('Hunger', JSON.stringify(currentHunger))
+      } else {
+        updateEntry('Hunger', '0');
+      }
+      currentWill -= 7;
+      updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage()
@@ -165,12 +188,17 @@ $(document).ready(function () {
   
   $('.button-container').on('click', '#btn-bath', function(e) {
     var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
-    if (currentSeptic >= 11) {
-      currentSeptic -= 11;
-      // play message / sprite
-      updateEntry('Septic', JSON.stringify(currentSeptic));
-    } else {
-      updateEntry('Septic', '0');
+    var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
+    if (currentWill > 14) {
+      if (currentSeptic >= 11) {
+        currentSeptic -= 11;
+        // play message / sprite
+        updateEntry('Septic', JSON.stringify(currentSeptic));
+      } else {
+        updateEntry('Septic', '0');
+      }
+      currentWill -= 14;
+      updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
     
     loadLocalStorage();
@@ -181,31 +209,39 @@ $(document).ready(function () {
 
   var gameTick = function() { // establishes session time and game tick interval on page load
     console.log('session time: ' + sessionTime)
+    var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
+    var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
+    var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
     sessionTime++
     setTimeout(gameTick, 1000);
+
+    // need to add death case and death messages
+
     if (localStorage.getItem('Half-Life') === '100') {
-      if (localStorage.getItem('Stage of Evolution') === '0') {
-        updateEntry('Half-Life', 15);
-        updateEntry('Stage of Evolution', '1')
-        evolutionStage++;
-        evolveToChick();
-        loadLocalStorage();
-      } else if (localStorage.getItem('Stage of Evolution') === '1') {
-        updateEntry('Half-Life', 15);
-        updateEntry('Stage of Evolution', '2')
-        evolutionStage++;
-        loadLocalStorage();
-        evolveToAdolescent();
-      } else if (localStorage.getItem('Stage of Evolution') === '2') {
-        updateEntry('Half-Life', 15);
-        updateEntry('Stage of Evolution', '3')
-        evolutionStage++;
-        loadLocalStorage();
-        evolveToRooster();
+      if (currentHappiness >= 80 && currentHunger <= 30 && currentSeptic <= 40) {
+        if (localStorage.getItem('Stage of Evolution') === '0') {
+          updateEntry('Half-Life', 15);
+          updateEntry('Stage of Evolution', '1')
+          evolutionStage++;
+          evolveToChick();
+          loadLocalStorage();
+        } else if (localStorage.getItem('Stage of Evolution') === '1') {
+          updateEntry('Half-Life', 15);
+          updateEntry('Stage of Evolution', '2')
+          evolutionStage++;
+          loadLocalStorage();
+          evolveToAdolescent();
+        } else if (localStorage.getItem('Stage of Evolution') === '2') {
+          updateEntry('Half-Life', 15);
+          updateEntry('Stage of Evolution', '3')
+          evolutionStage++;
+          loadLocalStorage();
+          evolveToRooster();
+        }
       }
     }
   }
-  
+    
   gameTick(); // initiate game time and check on game tick for evolution criteria
   
 });
@@ -234,11 +270,9 @@ var evolveToChick = function() {
   $('.button-container').append(btnPlay, btnFeed, btnBath);
   $('#creature').css('height', '150px');
   $('#creature').css('width', '150px');
-
   createEntry('Happiness', 50);
   createEntry('Hunger', 50);
   createEntry('Septic', 50);
-
   moveCreature();
   degradeHappiness();
   getHungry();
@@ -250,8 +284,6 @@ var evolveToAdolescent = function() {
   $('#creature').append(imgAdolescent);
   $('#creature').css('height', '260px');
   $('#creature').css('width', '155px');
-
-
 }
 
 var evolveToRooster = function() {
@@ -259,7 +291,6 @@ var evolveToRooster = function() {
   $('#creature').append(imgRooster);
   $('#creature').css('height', '230px');
   $('#creature').css('width', '230px');
-
 }
 
 // update storage 
@@ -294,7 +325,7 @@ var moveCreature = function() { // random movement every 1.5 game ticks.
 }
 
 var randomPadding = function() { // random padding
-  var paddingCheck = generateRandom(250);
+  var paddingCheck = generateRandom(216);
   return paddingCheck + 'px';
 }
 

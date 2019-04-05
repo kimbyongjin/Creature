@@ -86,10 +86,10 @@
 # Action Plan:
 
   ### Essentials
-    [] Initialization of app for first-time users
+    [x] Initialization of app for first-time users
       [x] on Document.ready => detect local storage
       [x] Initialize statrup framework
-      [] Populate local storage with necessary startup elements to allow app progression
+      [x] Populate local storage with necessary startup elements to allow app progression
     
     [x] Allow clearLocalStorage() to delete app progress and start over.
       [x] initial clear and page reload
