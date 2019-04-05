@@ -11,10 +11,6 @@
   - unable to add fetures until they are given access through evolution
   - or, other fetures are provided through in-game currency
   - examples of small-box game-window style
-    > Arcuz
-    > Armor Games
-    > Miniclip
-  - 
 
 
 ## Designs
@@ -112,7 +108,7 @@
     [x] Player box background color, border, shape, size, picture vs color?
     [x] Reformat table
     [] Reformat buttons to images
-    [] Reformat status message
+    [x] Reformat status message
     [] Variable background image
       [] scaling issues due to differently sized images?
       [] color scheme?
@@ -122,8 +118,8 @@
     [] Hover characteristics for interactive elements
     [] User customization?
       [] Creature name
-      [] Welcome message
-      [] Startup instructions
+      [x] Welcome message
+      [x] Startup instructions
       [] User feedback
 
   ### Creture Fetures
@@ -160,7 +156,8 @@
       [] wash of orange/yellow across screen
   
   ### Balancing
-    [] Attribute degredation / need:
+    [] Needs more balancing!
+    [x] Attribute degredation / need:
     [x] Cost in 'Will' to perform tasks
       - Does the 'Will' generation happen quickly enough to keep the creature alive?
       - Does the offset of irradiation and bathing match the need of the creture to stay alive?
@@ -171,7 +168,7 @@
     [] Egg hatches into a random creture with its own evolution path.
     [] Different attrributres and difficulties for each creature path?
     [x] On evolution, add essential elements for particular evolutionary stage.
-    [] Death
+    [x] Death
     [x] On 'Cull' => clear local storage and force reolad page
 
 

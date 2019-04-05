@@ -11,11 +11,25 @@ $(document).ready(function () {
   /*
   Set default / saved state on page load
   */
+  
+  // Welcome message
+  var welcomeMsg1 = '<p>Hello! If this is your first time trying creature, be warned.</p>';
+  var welcomeMsg2 = '<p>Death can come swiftly, and without warning!</p>';
+  var welcomeMsg3 = '<p>You will be awarded for your patience, love and care.</p>';
+  var welcomeMsg4 = '<p>You will be penalized for your laziness and neglect.</p>';
+  var welcomeMsg5 = '<p>Do you have the Strength of Will to succeed?</p>';
+  var welcomeMsg6 = '<p id="start-line">Press Start to begin!</p>';
 
   // Populate page for appropriate 
   var setDefault = function() {
     if (localStorage.getItem('Stage of Evolution') === null) {
-      $(btnStart).appendTo('.button-container');
+      $('.button-container').append(btnStart);
+      $('#status-label').append(welcomeMsg1);
+      $('#status-label').append(welcomeMsg2);
+      $('#status-label').append(welcomeMsg3);
+      $('#status-label').append(welcomeMsg4);
+      $('#status-label').append(welcomeMsg5);
+      $('#status-label').append(welcomeMsg6);
     }
     if (localStorage.getItem('Stage of Evolution') === '0') {
       $('.button-container').append(btnCull, btnIrradiate);
@@ -71,6 +85,7 @@ $(document).ready(function () {
   // Button Start
   $('.button-container').on('click', '#btn-start', function(e) {
     $('#btn-start').detach();
+    $('#status-label').detach();
     $('.button-container').append(btnCull);
     $('.button-container').append(btnIrradiate);
     $('#creature').append(imgEgg);
@@ -79,7 +94,7 @@ $(document).ready(function () {
     createEntry('Half-Life', 70);
       
     loadLocalStorage();
-    setTimeout(degradeHalfLife, 45000);
+    setTimeout(degradeHalfLife, 45000); // begin half-life degredation
     setTimeout(generateWill, 60000); // begin 'will' generation
   });
   

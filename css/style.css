@@ -46,6 +46,20 @@ body {
 	width: 615px;
 }
 
+#status-label {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+p {
+	font-size: 22px;
+	margin: 7px;
+}
+
+#start-line {
+	font-size: 26px;
+}
 /*
 	TABLE STYLING 
 */
