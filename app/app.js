@@ -11,7 +11,7 @@ $(document).ready(function () {
   /*
   Set default / saved state on page load
   */
-
+generateWill
   // Populate page for appropriate 
   var setDefault = function() {
     if (localStorage.getItem('Stage of Evolution') === null) {
@@ -21,6 +21,7 @@ $(document).ready(function () {
       $('.button-container').append(btnCull, btnIrradiate);
       $('#creature').append(imgEgg);
       degradeHalfLife();
+      setTimeout(generateWill, 60000);
     }
     if (localStorage.getItem('Stage of Evolution') === '1') {
       $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
@@ -32,6 +33,7 @@ $(document).ready(function () {
       degradeHappiness();
       getHungry();
       getSeptic();
+      setTimeout(generateWill, 60000);
     }
     if (localStorage.getItem('Stage of Evolution') === '2') {
       $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
@@ -43,6 +45,7 @@ $(document).ready(function () {
       degradeHappiness();
       getHungry();
       getSeptic();
+      setTimeout(generateWill, 60000);
     }
     if (localStorage.getItem('Stage of Evolution') === '3') {
       $('.button-container').append(btnCull, btnIrradiate, btnPlay, btnFeed, btnBath);
@@ -54,6 +57,7 @@ $(document).ready(function () {
       degradeHappiness();
       getHungry();
       getSeptic();
+      setTimeout(generateWill, 60000);
     }
   }
 
