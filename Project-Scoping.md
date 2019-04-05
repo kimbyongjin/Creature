@@ -1,3 +1,7 @@
+# Creature
+  by Daniel Kim,
+  April 4, 2019
+
 # Notes for my implementation of a CRUDdy app.
 
   - starting with basic framework, build upon the web app using local storage

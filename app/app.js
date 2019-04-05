@@ -1,3 +1,8 @@
+/*
+Creature 
+  By Daniel Kim
+*/
+
 $(document).ready(function () {
 
   // Loads empty for new user or recalls save state for current user
