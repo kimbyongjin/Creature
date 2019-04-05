@@ -188,7 +188,7 @@ $(document).ready(function () {
   // establishes death check for depleated stats and excessive need
   // throws an alert on death and evolution.
   var gameTick = function() { 
-    // console.log('session time: ' + sessionTime)
+    console.log('session time: ' + sessionTime);
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
@@ -296,6 +296,7 @@ var evolveToChick = function() {
   createEntry('Hunger', '23');
   createEntry('Septic', '27');
   moveCreature();
+
   degradeHappiness();
   getHungry();
   getSeptic();
@@ -341,7 +342,7 @@ var moveCreature = function() { // random movement every 1.5 game ticks.
   $('.play-screen-container').css('justify-content', randomJustify);
   $('#creature').css('transform', randomMirror);
   $('#creature').css('padding', randomPadding);
-  setTimeout(moveCreature, 1500);
+  setTimeout(moveCreature, 1200);
 }
 
 var randomPadding = function() { // random padding
