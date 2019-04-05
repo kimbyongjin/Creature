@@ -1,4 +1,9 @@
-# hrext08-my-cruddy-app
+# Creature
+By Daniel Kim
+
+To play, download this repo and open the file 'index.html'
+
+## hrext08-my-cruddy-app
 Create Read Update and Delete framework using JS
 
 
