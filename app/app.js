@@ -11,7 +11,7 @@ $(document).ready(function () {
   /*
   Set default / saved state on page load
   */
-generateWill
+
   // Populate page for appropriate 
   var setDefault = function() {
     if (localStorage.getItem('Stage of Evolution') === null) {
@@ -61,7 +61,8 @@ generateWill
     }
   }
 
-  setDefault(); // load stored progress
+  // Load stored progress or initialize beginning screen for new user and on-death restart / voluntary cull restart
+  setDefault(); 
   
   /*
   Interaction buttons
@@ -74,7 +75,7 @@ generateWill
     $('.button-container').append(btnIrradiate);
     $('#creature').append(imgEgg);
     createEntry('Strength of Will', 0);
-    createEntry('Stage of Evolution', evolutionStage);
+    createEntry('Stage of Evolution', 0);
     createEntry('Half-Life', 70);
       
     loadLocalStorage();
@@ -84,7 +85,6 @@ generateWill
   
   // Button Cull
   $('.button-container').on('click', '#btn-cull', function(e) {
-    console.log('clicked')
     alert('Culling your creature will reset all progress and cannot be undone!')
     localStorage.clear();
     location.reload();
@@ -169,11 +169,13 @@ generateWill
   App timer and status checker
   */
 
-  var evolutionStage = 0;
-  var sessionTime = 0
-
-  var gameTick = function() { // establishes session time and game tick interval on page load
-    console.log('session time: ' + sessionTime)
+  // establishes session time and game tick interval on page load
+  // establishes death check for depleated stats and excessive need
+  // throws an alert on death and evolution.
+  var gameTick = function() { 
+    // console.log('session time: ' + sessionTime)
+    var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
+    var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
     var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
     var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
@@ -181,6 +183,11 @@ generateWill
     setTimeout(gameTick, 1000);
 
     // Death
+    if (currentHalfLife === 0) {
+      alert('Your dull little creature froze to death!\nAlways remember to irradiate regularly.\nTry again!\n ')
+      localStorage.clear();
+      location.reload();
+    }
     if (currentHappiness === 0) {
       alert('Your neglected little creature died of lonelieness!\nMake sure to keep your creature entertained.\nTry again!\n ')
       localStorage.clear();
@@ -200,36 +207,46 @@ generateWill
     // Evolution
     if (localStorage.getItem('Half-Life') === '100') {
       if (localStorage.getItem('Stage of Evolution') === '0') {
-        updateEntry('Half-Life', 20);
+        updateEntry('Half-Life', '20');
         updateEntry('Stage of Evolution', '1')
-        evolutionStage++;
         evolveToChick();
         loadLocalStorage();
         alert('Your egg hatched!\n \nMeet your new baby chick!\n ');
       }
       if (currentHappiness >= 75 && currentHunger <= 35 && currentSeptic <= 40) {
         if (localStorage.getItem('Stage of Evolution') === '1') {
-          updateEntry('Half-Life', 20);
+          updateEntry('Half-Life', '20');
           updateEntry('Stage of Evolution', '2');
-          evolutionStage++;
           loadLocalStorage();
           evolveToAdolescent();
           alert('Your chick grew up into an adolescent!\n');
         } else if (localStorage.getItem('Stage of Evolution') === '2') {
-          updateEntry('Half-Life', 20);
+          updateEntry('Half-Life', '20');
           updateEntry('Stage of Evolution', '3');
-          evolutionStage++;
           loadLocalStorage();
           evolveToRooster();
           alert('Your young chicken is now a fully grown rooster!\n');
         }
       }
     }
+
+    // Long session bonuses aproximately every 2.2 hours of active session time
+    if (sessionTime % 9000 === 0) {
+      currentWill += 10;
+      updateEntry('Strength of Will', JSON.stringify(currentWill));
+
+      alert('Your patience is admirable!\nYou are awarded a bonus of 10 Will\nYour current session time is ' + ((sessionTime / 60) / 60).toFixed(2) + ' hours!');
+      console.log('generate bonus Will! -> session time: ' + sessionTime);
+      loadLocalStorage();
+    }
   }
     
   gameTick(); // initiate game time and check on game tick for evolution criteria
   
 });
+// Global use variable for time stamping triggers
+var sessionTime = 0
+
 // end Document.ready initialization
 
 /*
@@ -260,9 +277,9 @@ var evolveToChick = function() {
   $('.button-container').append(btnPlay, btnFeed, btnBath);
   $('#creature').css('height', '150px');
   $('#creature').css('width', '150px');
-  createEntry('Happiness', 71);
-  createEntry('Hunger', 23);
-  createEntry('Septic', 27);
+  createEntry('Happiness', '71');
+  createEntry('Hunger', '23');
+  createEntry('Septic', '27');
   moveCreature();
   degradeHappiness();
   getHungry();
@@ -348,7 +365,7 @@ var generateWill = function() {
     updateEntry('Strength of Will', JSON.stringify(currentWill));
   }
 
-  console.log('generate Will');
+  console.log('generate Will -> session time: ' + sessionTime);
   loadLocalStorage();
   setTimeout(generateWill, 60000);
 }
@@ -360,9 +377,9 @@ var degradeHalfLife = function() {
     updateEntry('Half-Life', JSON.stringify(currentHalfLife));
   }
 
-  console.log('degrade half-life')
+  console.log('degrade Half-Life -> session time: ' + sessionTime)
   loadLocalStorage();
-  setTimeout(degradeHalfLife, 63000);
+  setTimeout(degradeHalfLife, 120000);
 }
 
 var degradeHappiness = function() {
@@ -372,9 +389,9 @@ var degradeHappiness = function() {
     updateEntry('Happiness', JSON.stringify(currentHappiness));
   }
 
-  console.log('degrade happy')
+  console.log('degrade Happiness -> session time: ' + sessionTime)
   loadLocalStorage()
-  setTimeout(degradeHappiness, 53000);
+  setTimeout(degradeHappiness, 90000);
 }
 
 var getHungry = function() {
@@ -384,9 +401,9 @@ var getHungry = function() {
     updateEntry('Hunger', JSON.stringify(currentHunger));
   }
 
-  console.log('get hungry')
+  console.log('get Hungry -> session time: ' + sessionTime)
   loadLocalStorage()
-  setTimeout(getHungry, 58000);
+  setTimeout(getHungry, 98000);
 }
 
 var getSeptic = function() {
@@ -396,9 +413,9 @@ var getSeptic = function() {
     updateEntry('Septic', JSON.stringify(currentSeptic));
   }
 
-  console.log('get septic')
+  console.log('get Septic -> session time: ' + sessionTime)
   loadLocalStorage();
-  setTimeout(getSeptic, 65000);
+  setTimeout(getSeptic, 140000);
 }
 
 /*
