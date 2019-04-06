@@ -112,9 +112,9 @@ $(document).ready(function () {
   $('.button-container').on('click', '#btn-irradiate', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 9) {
-      if (currentHalfLife <= 87) {
-        currentHalfLife += 13;
+    if (currentWill >= 9) {
+      if (currentHalfLife <= 86) {
+        currentHalfLife += 14;
         updateEntry('Half-Life', JSON.stringify(currentHalfLife))
       } else {
         updateEntry('Half-Life', 100);
@@ -130,9 +130,9 @@ $(document).ready(function () {
   $('.button-container').on('click', '#btn-play', function(e) {
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 6) {
-      if (currentHappiness <= 89) {
-        currentHappiness += 11;
+    if (currentWill >= 6) {
+      if (currentHappiness <= 87) {
+        currentHappiness += 13;
         // play message / sprite
         updateEntry('Happiness', JSON.stringify(currentHappiness));
       } else {
@@ -149,9 +149,9 @@ $(document).ready(function () {
   $('.button-container').on('click', '#btn-feed', function(e) { // feeding decreases hunger 
     var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 7) {
-      if (currentHunger >= 9) {
-        currentHunger -= 9;
+    if (currentWill >= 7) {
+      if (currentHunger >= 12) {
+        currentHunger -= 12;
         // feed message / sprite
         updateEntry('Hunger', JSON.stringify(currentHunger))
       } else {
@@ -168,9 +168,9 @@ $(document).ready(function () {
   $('.button-container').on('click', '#btn-bath', function(e) {
     var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
     var currentWill = JSON.parse(localStorage.getItem('Strength of Will'));
-    if (currentWill > 11) {
-      if (currentSeptic >= 13) {
-        currentSeptic -= 13;
+    if (currentWill >= 11) {
+      if (currentSeptic >= 14) {
+        currentSeptic -= 14;
         // play message / sprite
         updateEntry('Septic', JSON.stringify(currentSeptic));
       } else {
@@ -263,7 +263,7 @@ $(document).ready(function () {
   
 });
 // Global use variable for time stamping triggers
-var sessionTime = 0
+var sessionTime = 0;
 
 // end Document.ready initialization
 
@@ -295,11 +295,10 @@ var evolveToChick = function() {
   $('.button-container').append(btnPlay, btnFeed, btnBath);
   $('#creature').css('height', '150px');
   $('#creature').css('width', '150px');
-  createEntry('Happiness', '43');
-  createEntry('Hunger', '52');
-  createEntry('Septic', '41');
+  createEntry('Happiness', '52');
+  createEntry('Hunger', '43');
+  createEntry('Septic', '29');
   moveCreature();
-
   degradeHappiness();
   getHungry();
   getSeptic();
@@ -323,14 +322,15 @@ var evolveToRooster = function() {
 Update storage 
 */
 
+// update page with current local storage keys / values
 var loadLocalStorage = function () {
   var keys = Object.keys(localStorage)
-var htmlString = '';
-for (var i = 0; i < keys.length; i++) {
-  htmlString += `<tr><td>${keys[i]}</td><td>${localStorage[keys[i]]}</tr></tr>`;
+  var htmlString = '';
+  for (var i = 0; i < keys.length; i++) {
+    htmlString += `<tr><td>${keys[i]}</td><td>${localStorage[keys[i]]}</tr></tr>`;
+  }
+  $('tbody').html(htmlString)
 }
-$('tbody').html(htmlString)
-};
 
 // would like to use status bar a little, with some text fading implementation
 var updateStatusLabel = function(message) {
@@ -341,19 +341,22 @@ var updateStatusLabel = function(message) {
 jQuery animation based on session time
 */
 
-var moveCreature = function() { // random movement every 1.5 game ticks.
+// random movement every 1.2 game ticks
+var moveCreature = function() {
   $('.play-screen-container').css('justify-content', randomJustify);
   $('#creature').css('transform', randomMirror);
   $('#creature').css('padding', randomPadding);
   setTimeout(moveCreature, 1200);
 }
 
-var randomPadding = function() { // random padding
+// random padding
+var randomPadding = function() {
   var paddingCheck = generateRandom(216);
   return paddingCheck + 'px';
 }
 
-var randomJustify = function() { // random flex position
+// random flex position
+var randomJustify = function() {
   var justifyCheck = generateRandom(3);
   if (justifyCheck === 0) {
     return 'center';
@@ -364,17 +367,18 @@ var randomJustify = function() { // random flex position
   return 'flex-start';
 }
 
-var randomMirror = function() { // generate random creture direction
+// generate random creture direction
+var randomMirror = function() {
   var mirrorCheck = generateRandom(2);
   if (mirrorCheck === 0) {
-    return 'scaleX(-1)'
+    return 'scaleX(-1)';
   }
-  return 'scaleX(1)'
+  return 'scaleX(1)';
 }
 
 
 /*
-Attribute degredation and need incrementation
+Attribute degredation and need incrementation functions
 */
 
 var generateWill = function() {
@@ -396,7 +400,7 @@ var degradeHalfLife = function() {
     updateEntry('Half-Life', JSON.stringify(currentHalfLife));
   }
 
-  console.log('degrade Half-Life -> session time: ' + sessionTime)
+  console.log('degrade Half-Life -> session time: ' + sessionTime);
   loadLocalStorage();
   setTimeout(degradeHalfLife, 120000);
 }
@@ -408,8 +412,8 @@ var degradeHappiness = function() {
     updateEntry('Happiness', JSON.stringify(currentHappiness));
   }
 
-  console.log('degrade Happiness -> session time: ' + sessionTime)
-  loadLocalStorage()
+  console.log('degrade Happiness -> session time: ' + sessionTime);
+  loadLocalStorage();
   setTimeout(degradeHappiness, 90000);
 }
 
@@ -420,8 +424,8 @@ var getHungry = function() {
     updateEntry('Hunger', JSON.stringify(currentHunger));
   }
 
-  console.log('get Hungry -> session time: ' + sessionTime)
-  loadLocalStorage()
+  console.log('get Hungry -> session time: ' + sessionTime);
+  loadLocalStorage();
   setTimeout(getHungry, 98000);
 }
 
@@ -438,7 +442,7 @@ var getSeptic = function() {
 }
 
 /*
-Local storage manipulation stuff
+Local storage manipulation functions
 */
 
 //create new entry
@@ -447,7 +451,6 @@ var createEntry = function(key, value) {
 }
 
 // update existing entry
-
 var updateEntry = function(key, value) {
 	return localStorage.setItem(key, value);
 }
@@ -458,7 +461,7 @@ var removeEntry = function(key) {
 }
 
 /*
-Random val generation functions
+Random value generation functions
 */
 
 var generateRandom = function(max) { // return a random integer between 0 (inclusive) and max (exclusive)
