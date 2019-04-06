@@ -23,6 +23,7 @@ $(document).ready(function () {
 
   // Populate page for appropriate 
   var setDefault = function() {
+    $('.play-screen-container').css('background-image', "url('images/Wheat_Fields_at_Auvers_Under_Clouded_Sky_1890_Vincent_van_Gogh.jpg')");
     if (localStorage.getItem('Stage of Evolution') === null) {
       $('.button-container').append(btnStart);
       $('#status-label').append(welcomeMsg1);
@@ -385,7 +386,7 @@ var generateWill = function() {
 
   console.log('generate Will -> session time: ' + sessionTime);
   loadLocalStorage();
-  setTimeout(generateWill, 60000);
+  setTimeout(generateWill, 30000);
 }
 
 var degradeHalfLife = function() {

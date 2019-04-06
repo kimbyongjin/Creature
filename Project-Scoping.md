@@ -174,5 +174,8 @@
 
 NOTES:
 updateStatusLabel function adds a status message to the div with ID #status label
- - need text fade and general styling
+[] need text fade and general styling
+[] Will generation is too slow
+[] button click to consume will should work as if will >= 7, than will -= 7. currently, it is will > 7... case of hunger
+
 
