@@ -1,9 +1,9 @@
-/* 
+/*
 Creature
 	by Daniel Kim
 */
 
-/* 
+/*
 Overall page styling
 */
 
@@ -33,7 +33,8 @@ body {
 	padding: 20px;
 	justify-content: center;
 	align-items: flex-end;
-	/* 
+
+	/*
 	background image: File: Wheat Fields at Auvers Under Clouded Sky 1890 Vincent van Gogh.jpg 
 	This work is in the public domain in the United States because it was published (or registered with the U.S. Copyright Office) before January 1, 1924.
 	*/
@@ -59,8 +60,9 @@ p {
 #start-line {
 	font-size: 26px;
 }
+
 /*
-	TABLE STYLING 
+	TABLE STYLING
 */
 
 table {
@@ -84,7 +86,7 @@ label {
     width: 80px;
 }
 
-/* 
+/*
 Button Styling
 */
 
@@ -97,7 +99,7 @@ button.button {
 	cursor: pointer;
 }
 
-/* 
+/*
 Creature styling
 */
 
@@ -108,32 +110,32 @@ Creature styling
 	padding: 70px;
 }
 
-/* 
+/*
 Image styling
 */
 
 #egg {
-	/* 
+	/*
 	needs container height: 130px and width: 160px
 	*/
 	height: 100%;
 	width: 100%;
 	transform: scaleX(-1);
 	/*
-	Egg image obtained with free license, no attribution necessary 
+	Egg image obtained with free license, no attribution necessary
 	https://pixabay.com/service/license/
 	*/
 }
 
 #chick {
-	/* 
-	needs container height: 150px and width: 150px 
+	/*
+	needs container height: 150px and width: 150px
 	*/
 	height: 100%;
 	width: 100%;
 	transform: scaleX(-1);
 	/*
-	Egg image obtained with free license, no attribution necessary 
+	Egg image obtained with free license, no attribution necessary
 	https://pixabay.com/service/license/
 	*/
 }
@@ -145,8 +147,8 @@ Image styling
 	height: 100%;
 	width: 100%;
 	transform: scaleX(-1);
-	/* 
-	Adolescent chicken image obtained with free license, no attribution necessary 
+	/*
+	Adolescent chicken image obtained with free license, no attribution necessary
 	https://pixabay.com/service/license/
 	*/
 }
@@ -158,8 +160,8 @@ Image styling
 	height: 100%;
 	width: 100%;
 	transform: scaleX(-1);
-	/* 
-	Rooster image obtained with free license, no attribution necessary 
+	/*
+	Rooster image obtained with free license, no attribution necessary
 	https://pixabay.com/service/license/
 	*/
 }

@@ -1,5 +1,5 @@
 /*
-Creature 
+Creature
   By Daniel Kim
 */
 
@@ -7,11 +7,11 @@ $(document).ready(function () {
 
   // Loads empty for new user or recalls save state for current user
   loadLocalStorage();
-  
+
   /*
   Set default / saved state on page load
   */
-  
+
   // Welcome message
   var welcomeMsg1 = '<p>If this is your first time trying creature, be warned.</p>';
   var welcomeMsg2 = '<p>Death can come swiftly, and without warning!</p>';
@@ -21,7 +21,7 @@ $(document).ready(function () {
   var welcomeMsg6 = '<p>Give it time...</p>';
   var welcomeMsg7 = '<p id="start-line">Press Start to begin!</p>';
 
-  // Populate page for appropriate 
+  // Populate page for appropriate
   var setDefault = function() {
     $('.play-screen-container').css('background-image', "url('images/Wheat_Fields_at_Auvers_Under_Clouded_Sky_1890_Vincent_van_Gogh.jpg')");
     if (localStorage.getItem('Stage of Evolution') === null) {
@@ -79,8 +79,8 @@ $(document).ready(function () {
   }
 
   // Load stored progress or initialize beginning screen for new user and on-death restart / voluntary cull restart
-  setDefault(); 
-  
+  setDefault();
+
   /*
   Interaction buttons
   */
@@ -95,19 +95,19 @@ $(document).ready(function () {
     createEntry('Strength of Will', 0);
     createEntry('Stage of Evolution', 0);
     createEntry('Half-Life', 70);
-      
+
     loadLocalStorage();
     setTimeout(degradeHalfLife, 45000); // begin half-life degredation
     setTimeout(generateWill, 60000); // begin 'will' generation
   });
-  
+
   // Button Cull
   $('.button-container').on('click', '#btn-cull', function(e) {
     alert('Culling your creature will reset all progress and cannot be undone!')
     localStorage.clear();
     location.reload();
   });
-  
+
   // Button Irradiate
   $('.button-container').on('click', '#btn-irradiate', function(e) {
     var currentHalfLife = JSON.parse(localStorage.getItem('Half-Life'));
@@ -122,10 +122,10 @@ $(document).ready(function () {
       currentWill -= 9;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
-    
+
     loadLocalStorage();
   });
-  
+
   // Button Play
   $('.button-container').on('click', '#btn-play', function(e) {
     var currentHappiness = JSON.parse(localStorage.getItem('Happiness'));
@@ -141,10 +141,10 @@ $(document).ready(function () {
       currentWill -= 6;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
-    
+
     loadLocalStorage()
   });
-  
+
   // Button Feed
   $('.button-container').on('click', '#btn-feed', function(e) { // feeding decreases hunger 
     var currentHunger = JSON.parse(localStorage.getItem('Hunger'));
@@ -160,10 +160,10 @@ $(document).ready(function () {
       currentWill -= 7;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
-    
+
     loadLocalStorage()
   });
-  
+
   // Button Bath
   $('.button-container').on('click', '#btn-bath', function(e) {
     var currentSeptic = JSON.parse(localStorage.getItem('Septic'));
@@ -179,10 +179,10 @@ $(document).ready(function () {
       currentWill -= 11;
       updateEntry('Strength of Will', JSON.stringify(currentWill));
     }
-    
+
     loadLocalStorage();
   });
-  
+
   /*
   App timer and status checker
   */
@@ -258,9 +258,9 @@ $(document).ready(function () {
       loadLocalStorage();
     }
   }
-    
+
   gameTick(); // initiate game time and check on game tick for evolution criteria
-  
+
 });
 // Global use variable for time stamping triggers
 var sessionTime = 0;
@@ -319,7 +319,7 @@ var evolveToRooster = function() {
 }
 
 /*
-Update storage 
+Update storage
 */
 
 // update page with current local storage keys / values

@@ -42,7 +42,6 @@
     > Time decaying atributes.
       - stages of growth
       - hunger / requiring the need for attention
-      - 
 
     > Time generating attributes
       - in-game currency
@@ -71,12 +70,10 @@
         - purchases
         - evolution
     - heavy use of setTimeout() functionality
-    > 
 
   - CSS:
     - jQuery
     - flexbox
-    > 
 
   - HTML:
     - jQuery
@@ -90,7 +87,7 @@
       [x] on Document.ready => detect local storage
       [x] Initialize statrup framework
       [x] Populate local storage with necessary startup elements to allow app progression
-    
+
     [x] Allow clearLocalStorage() to delete app progress and start over.
       [x] initial clear and page reload
       [] Warning and 2-step varification
@@ -114,7 +111,7 @@
       [] color scheme?
     [] Better background color/ image for document body
     [] General UI improvements
-    [] Button graphics, shadowing, motion, 
+    [] Button graphics, shadowing, motion,
     [] Hover characteristics for interactive elements
     [] User customization?
       [] Creature name
@@ -123,7 +120,7 @@
       [] User feedback
 
   ### Creture Fetures
-    Attributes: 
+    Attributes:
       [x] Hunger -> grows with time & decreases with interaction 'feed'
       [x] Happiness -> degrades with time & increases with interaction 'play'
       [x] Septic -> grows with time & decreases with interaction 'bath'
@@ -154,7 +151,7 @@
       [] wash of blue across screen
     Irradiate:
       [] wash of orange/yellow across screen
-  
+
   ### Balancing
     [] Needs more balancing!
     [x] Attribute degredation / need:
@@ -177,5 +174,3 @@ updateStatusLabel function adds a status message to the div with ID #status labe
 [] need text fade and general styling
 [] Will generation is too slow
 [] button click to consume will should work as if will >= 7, than will -= 7. currently, it is will > 7... case of hunger
-
-
